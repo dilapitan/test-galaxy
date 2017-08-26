@@ -41,12 +41,13 @@ def retrieveValues(file):
 	inputsParams = root.findall('inputs//param') # getting the <param> under the <inputs>
 	
 	inputsParamValues = []
-	for inputsParam in inputsParams:
-		inputsNameText = inputsParam.get('name')
-		inputsTypeText = inputsParam.get('type')
+	for testCount in range(0, testLength): # for catching multiple <test>
+		for inputsParam in inputsParams:
+			inputsNameText = inputsParam.get('name')
+			inputsTypeText = inputsParam.get('type')
 
-		inputsParamValues.append(inputsNameText)
-		inputsParamValues.append(inputsTypeText)
+			inputsParamValues.append(inputsNameText)
+			inputsParamValues.append(inputsTypeText)
 		
 	print(testParamValues)
 	print(inputsParamValues)
