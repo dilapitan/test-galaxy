@@ -2,12 +2,6 @@
   <description>to an existing dataset</description>
   <command interpreter="perl">fixedValueColumn.pl $input $out_file1 "$exp" $iterate</command>
   <inputs>
-   <!--  <when>
-     <what>
-       <param name="exp" size="20" type="text" value="1" label="Add this value"/>    
-     </what>
-     
-   </when> -->
     <param name="exp" size="20" type="text" value="1" label="Add this value"/>
     <param format="tabular" name="input" type="data" label="to Dataset" help="Dataset missing? See TIP below" />
     <param name="iterate" type="select" label="Iterate?">
@@ -25,10 +19,6 @@
       <param name="iterate" value="no"/>
       <output name="out_file1" file="eq-addvalue.dat"/>
     </test>
-   
-
-
-    
   </tests>
   <help>
 

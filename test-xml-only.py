@@ -1,9 +1,16 @@
+import xml.etree.ElementTree as ET
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
 
-import xml.etree.ElementTree as ET
 import os
+
+'''
+# Selenium Part
+chromePath = "/home/dom/Downloads/chromedriver"
+
+browser = webdriver.Chrome(chromePath)
+browser.get('http://localhost:8080/')
+'''
 
 # XML parsing and retrieving values
 def retrieveValues(file):
@@ -77,41 +84,40 @@ def retrieveValues(file):
 	
 	return wholeValues, toolName # values for automation
 
+def testGalaxy():
+
+	# reading multiple xml files in order
+	toolsPath = "all-tools" # whole directory of all tools
+	toolTypePath = "text-man-xml-files" #specific type of tools
+	#directory = toolsPath + "/" + toolTypePath
+
+	directory = "/home/dom/Desktop/test-galaxy/"
+
+	items = os.listdir(directory)
+	for file in sorted(items):
+		if file.endswith(".xml"):
+			v, toolName = retrieveValues(file)
+
+			print(toolName)
+			# for checking
+			for i in range(0, len(v)):
+				print(i+1)
+				for j in range(0, len(v[i])):
+					print("\n")
+					print("test name: ", v[i][j].n)
+					print("test data type: ", v[i][j].dt)
+					print("test value: ", v[i][j].v)
+		
+
+			# Selenium part goes here
+
+			break
 
 
+def main():
+	testGalaxy()
 
-chromePath = "/home/dom/Downloads/chromedriver"
-
-driver = webdriver.Chrome(chromePath)
-driver.get('http://localhost:8080/')
-
-# reading multiple xml files in order
-toolsPath = "all-tools" # whole directory of all tools
-toolTypePath = "text-man-xml-files" #specific type of tools
-#directory = toolsPath + "/" + toolTypePath
-
-directory = "/home/dom/Desktop/test-galaxy/"
-
-items = os.listdir(directory)
-for file in sorted(items):
-	if file.endswith(".xml"):
-		v, toolName = retrieveValues(file)
-
-		print(toolName)
-		# for checking
-		for i in range(0, len(v)):
-			print(i+1)
-			for j in range(0, len(v[i])):
-				print("\n")
-				print("test name: ", v[i][j].n)
-				print("test data type: ", v[i][j].dt)
-				print("test value: ", v[i][j].v)
-	
-		''' 
-			Automation / mimicking user
-		'''
-
-		break
+main()
 
 
 
