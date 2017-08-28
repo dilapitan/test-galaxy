@@ -26,7 +26,7 @@ def retrieveValues(file):
 	testParamValues = [] # array of values under <param> of <test>
 	
 	testParams = root.findall('.//test//param')
-	testParamLength = len(testParams) # getting the number of <param> under <test>
+	
 
 	for testParam in testParams:
 		testNameText = testParam.get('name')	# get the value of 'name' attribute
@@ -42,6 +42,8 @@ def retrieveValues(file):
 	inputsElement = root.findall('inputs') 
 	inputsParams = root.findall('inputs//param') # getting the <param> under the <inputs>
 	
+	inputsParamsLength = len(inputsParams)
+
 	inputsParamValues = []
 	for testCount in range(0, testLength): # for catching multiple <test>
 		for inputsParam in inputsParams:
@@ -65,25 +67,24 @@ def retrieveValues(file):
 			self.v = value
 
 	c = 0
-	paramDouble = testParamLength * 2
-	wholeV = [] # values of all v
+	paramDouble = inputsParamsLength * 2
+	d = paramDouble
+
+	wholeValues = [] # values of all v
 	for i in range(0, testLength):
 		v = [] # values of single <test> 
-		while (c != paramDouble):
+		while (c != d):
 			# object creation
 			testObject = Values(testParamValues[c], testParamValues[c+1], inputsParamValues[c+1])
-			
-			# for checking
-			# print("test name: ", testObject.n)
-			# print("test data type: ", testObject.dt)
-			# print("test value: ", testObject.v)
-			# print("\n")
-			
+		
 			v.append(testObject)
 			c += 2
-		wholeV.append(v)
+		d += paramDouble
+		wholeValues.append(v)
+	
+	return wholeValues # values for automation
 
-	return wholeV # values for automation
+
 
 # reading multiple xml files in order
 toolsPath = "all-tools" # whole directory of all tools
@@ -95,7 +96,18 @@ directory = "/home/dom/Desktop/test-galaxy/"
 items = os.listdir(directory)
 for file in sorted(items):
 	if file.endswith(".xml"):
-		retrieveValues(file)
+		wholeValues = retrieveValues(file)
+
+		
+		# for checking
+		for i in range(0, len(wholeValues)):
+			print(i+1)
+			for j in range(0, len(wholeValues[i])):
+				print("\n")
+				print("test name: ", wholeValues[i][j].n)
+				print("test data type: ", wholeValues[i][j].dt)
+				print("test value: ", wholeValues[i][j].v)
+	
 		break
 
 
