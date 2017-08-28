@@ -16,7 +16,8 @@ browser.get('http://localhost:8080/')
 # XML parsing and retrieving values
 def retrieveValues(file):
 	root = ET.parse(file).getroot() 
-	
+	toolName = root.get('name') # getting the tool name
+	print(toolName)
 	'''
 		Getting the values from <tests>
 	'''
