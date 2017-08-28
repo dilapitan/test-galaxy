@@ -25,12 +25,6 @@
       <param name="iterate" value="no"/>
       <output name="out_file1" file="eq-addvalue.dat"/>
     </test>
-    <test>
-      <param name="exp" value="1000"/>
-      <param name="input" value="1.bed"/>
-      <param name="iterate" value="no"/>
-      <output name="out_file1" file="eq-addvalue.dat"/>
-    </test>
   </tests>
   <help>
 
