@@ -43,11 +43,15 @@ def retrieveValues(file):
 			inputsNameText = inputsParam.get('name')
 			inputsTypeText = inputsParam.get('type')
 
+			data = inputsParam.get('format')
+			if (data != None):
+				dataFormat = data
+
 			inputsParamValues.append(inputsNameText)
 			inputsParamValues.append(inputsTypeText)
 		
-	#print(testParamValues)
-	#print(inputsParamValues)
+	print(testParamValues)
+	print(inputsParamValues)
 
 	''' 
 		Object that will be passed for automation 
@@ -75,43 +79,43 @@ def retrieveValues(file):
 		d += paramDouble
 		wholeValues.append(v)
 	
-	return wholeValues, toolName # values for automation
+	return wholeValues, toolName, dataFormat # values for automation
+
+retrieveValues("/home/dom/Desktop/test-galaxy/fixedValueColumn.xml")
 
 
+# chromePath = "/home/dom/Downloads/chromedriver"
 
+# driver = webdriver.Chrome(chromePath)
+# driver.get('http://localhost:8080/')
 
-chromePath = "/home/dom/Downloads/chromedriver"
+# # reading multiple xml files in order
+# toolsPath = "all-tools" # whole directory of all tools
+# toolTypePath = "text-man-xml-files" #specific type of tools
+# #directory = toolsPath + "/" + toolTypePath
 
-driver = webdriver.Chrome(chromePath)
-driver.get('http://localhost:8080/')
+# directory = "/home/dom/Desktop/test-galaxy/"
 
-# reading multiple xml files in order
-toolsPath = "all-tools" # whole directory of all tools
-toolTypePath = "text-man-xml-files" #specific type of tools
-#directory = toolsPath + "/" + toolTypePath
+# items = os.listdir(directory)
+# for file in sorted(items):
+# 	if file.endswith(".xml"):
+# 		v, toolName, data = retrieveValues(file)
 
-directory = "/home/dom/Desktop/test-galaxy/"
-
-items = os.listdir(directory)
-for file in sorted(items):
-	if file.endswith(".xml"):
-		v, toolName = retrieveValues(file)
-
-		print(toolName)
-		# for checking
-		for i in range(0, len(v)):
-			print(i+1)
-			for j in range(0, len(v[i])):
-				print("\n")
-				print("test name: ", v[i][j].n)
-				print("test data type: ", v[i][j].dt)
-				print("test value: ", v[i][j].v)
+# 		print(toolName)
+# 		# for checking
+# 		for i in range(0, len(v)):
+# 			print(i+1)
+# 			for j in range(0, len(v[i])):
+# 				print("\n")
+# 				print("test name: ", v[i][j].n)
+# 				print("test data type: ", v[i][j].dt)
+# 				print("test value: ", v[i][j].v)
 	
-		''' 
-			Automation / mimicking user
-		'''
+# 		''' 
+# 			Automation / mimicking user
+# 		'''
 
-		break
+# 		break
 
 
 
