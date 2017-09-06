@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 
 import xml.etree.ElementTree as ET
 import os
+import glob
 
 # XML parsing and retrieving values
 def retrieveValues(file):
@@ -38,6 +39,7 @@ def retrieveValues(file):
 	inputsParamsLength = len(inputsParams)
 
 	inputsParamValues = []
+	dataFormat = ""
 	for testCount in range(0, testLength): # for catching multiple <test>
 		for inputsParam in inputsParams:
 			inputsNameText = inputsParam.get('name')
@@ -50,8 +52,8 @@ def retrieveValues(file):
 			inputsParamValues.append(inputsNameText)
 			inputsParamValues.append(inputsTypeText)
 		
-	print(testParamValues)
-	print(inputsParamValues)
+	# print(testParamValues)
+	# print(inputsParamValues)
 
 	''' 
 		Object that will be passed for automation 
@@ -79,46 +81,38 @@ def retrieveValues(file):
 		d += paramDouble
 		wholeValues.append(v)
 	
+	#print("retrieved!")
 	return wholeValues, toolName, dataFormat # values for automation
 
-retrieveValues("/home/dom/Desktop/test-galaxy/fixedValueColumn.xml")
+#chromePath = "/home/dom/Downloads/chromedriver"
 
+#driver = webdriver.Chrome(chromePath)
+#driver.get('http://localhost:8080/')
 
-# chromePath = "/home/dom/Downloads/chromedriver"
+# reading multiple xml files in order
+toolsPath = "all-tools" # whole directory of all tools
+toolTypePath = "text-man-xml-files" #specific type of tools
+directory = toolsPath + "/" + toolTypePath
 
-# driver = webdriver.Chrome(chromePath)
-# driver.get('http://localhost:8080/')
-
-# # reading multiple xml files in order
-# toolsPath = "all-tools" # whole directory of all tools
-# toolTypePath = "text-man-xml-files" #specific type of tools
-# #directory = toolsPath + "/" + toolTypePath
-
-# directory = "/home/dom/Desktop/test-galaxy/"
-
-# items = os.listdir(directory)
-# for file in sorted(items):
-# 	if file.endswith(".xml"):
-# 		v, toolName, data = retrieveValues(file)
-
-# 		print(toolName)
-# 		# for checking
-# 		for i in range(0, len(v)):
-# 			print(i+1)
-# 			for j in range(0, len(v[i])):
-# 				print("\n")
-# 				print("test name: ", v[i][j].n)
-# 				print("test data type: ", v[i][j].dt)
-# 				print("test value: ", v[i][j].v)
+items = glob.glob(directory + "/*.xml")
+items = sorted(items)
+for file in items:
+	v, toolName, dformat = retrieveValues(file)
 	
-# 		''' 
-# 			Automation / mimicking user
-# 		'''
+	# for checking
+	for i in range(0, len(v)):
+		print(i+1)
+		for j in range(0, len(v[i])):
+			print("\n")
+			print("test name: ", v[i][j].n)
+			print("test data type: ", v[i][j].dt)
+			print("test value: ", v[i][j].v)
 
-# 		break
+	# 		''' 
+	# 			Automation / mimicking user
+	# 		'''
 
-
-
+	break
 
 
 

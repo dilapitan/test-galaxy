@@ -20,7 +20,7 @@
     <tests>
         <test>
             <param name="input1" value="1.bed"/>
-            <!-- <param name="input2" value="2.bed"/> -->
+            <param name="input2" value="2.bed"/>
             <output name="out_file1" file="cat_wrapper_out1.bed"/>
         </test>
         <!--TODO: if possible, enhance the underlying test code to handle this test
