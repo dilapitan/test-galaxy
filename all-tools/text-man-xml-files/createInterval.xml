@@ -2,6 +2,7 @@
   <description>as a new dataset</description>
   <command interpreter="perl">CreateInterval.pl $chrom $start $end "$name" $strand $out_file1</command>
   <inputs>
+    <param format="tabular" />
     <param name="chrom" size="20" type="text" value="chr7" label="Chromosome"/>
     <param name="start" size="20" type="integer" value="100" label="Start position"/>
     <param name="end"   size="20" type="integer" value="1000" label="End position"/>
@@ -16,6 +17,7 @@
   </outputs>
   <tests>
     <test>
+      <param name="input" value="1.bed"/>
       <param name="chrom" value="chr7"/>
       <param name="start" value="100"/>
       <param name="end" value="1000"/>

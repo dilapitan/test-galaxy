@@ -6,7 +6,7 @@ python '$__tool_directory__/trimmer.py' -a -f '$input1' -c $col -s $start -e $en
 ]]>
     </command>
     <inputs>
-        <param name="input1" type="data" format="tabular,txt" label="Input dataset" />
+        <param name="input1" type="data" format="tabular" label="Input dataset" />
         <param name="col" type="integer" value="0" label="Trim this column only" help="0 = process entire line" />
         <param name="start" type="integer" value="1" label="Trim from the beginning up to this position" help="Only positive positions allowed. 1 = do not trim the beginning"/>
         <param name="end" type="integer" value="0" label="Remove everything from this position to the end" help="Use negative position to indicate position starting from the end. 0 = do not trim the end"/>
