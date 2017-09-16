@@ -87,6 +87,49 @@ def retrieveValues(file):
 	#print("retrieved!")
 	return wholeValues, toolName, dataFormat # values for automation
 
+def printMenu():
+	print("--- TOOL TYPES FOR TESTING ---")
+	print("[1] Convert formats")
+	print("[2] Extract features")
+	print("[3] Fetch Alignments")
+	print("[4] Fetch Sequence")
+	print("[5] Filter and Sort")
+	print("[6] Graph Display Data")
+	print("[7] Join Subtract and Group")
+	print("[8] Statistics")
+	print("[9] Text Man XML Files")
+	print("[0] Exit Program")
+
+	i = int(input("Choice: "))
+	return i
+
+
+# choice = printMenu()
+# if (choice == 1):
+# 	toolTypePath = "convert-formats"
+# elif (choice == 2):
+# 	toolTypePath = "extract-features"
+# elif (choice == 3):
+# 	toolTypePath = "fetch-alignments"
+# elif (choice == 4):
+# 	toolTypePath = "fetch-sequence"
+# elif (choice == 5):
+# 	toolTypePath = "filter-and-sort"
+# elif (choice == 6):
+# 	toolTypePath = "graph-display-data"
+# elif (choice == 7):
+# 	toolTypePath = "join-subtract-and-group"
+# elif (choice == 8):
+# 	toolTypePath = "statistics"
+# elif (choice == 9):
+# 	toolTypePath = "text-man-xml-files"
+# elif (choice == 0):
+# 	print("Program now exiting...")
+# 	exit()
+# else:
+# 	print("Input not in choice. Program will now exit...")
+# 	exit()
+
 chromePath = "/home/dom/Downloads/chromedriver"
 
 driver = webdriver.Chrome(chromePath)
@@ -95,7 +138,7 @@ driver.get('http://localhost:8080/')
 
 # reading multiple xml files in order
 toolsPath = "all-tools" # whole directory of all tools
-toolTypePath = "text-man-xml-files" #specific type of tools
+toolTypePath = "text-man-xml-files"
 directory = toolsPath + "/" + toolTypePath
 
 items = glob.glob(directory + "/*.xml")
@@ -114,10 +157,10 @@ for file in items:
 		getDataLabel = driver.find_element_by_xpath("/html/body/div[1]/div[5]/div[2]/div/div[1]/div[2]/div[1]/a")
 
 		for j in range(0, len(v[i])): 	# each param tag
-			print("\n")
-			print("test name: ", v[i][j].n)
-			print("test data type: ", v[i][j].dt)
-			print("test value: ", v[i][j].v)
+			# print("\n")
+			# print("test name: ", v[i][j].n)
+			# print("test data type: ", v[i][j].dt)
+			# print("test value: ", v[i][j].v)
 		
 			# Uploading of file given a certain dformat
 
@@ -166,7 +209,7 @@ for file in items:
 			Automation
 		'''
 
-		
+
 
 
 
