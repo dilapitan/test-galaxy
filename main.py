@@ -78,7 +78,7 @@ def retrieveValues(file):
 		v = [] # values of single <test> 
 		while (c != d):
 			# object creation
-			testObject = Values(testParamValues[c], testParamValues[c+1], inputsParamValues[c+1])
+			testObject = Values(testParamValues[c], inputsParamValues[c+1], testParamValues[c+1])
 		
 			v.append(testObject)
 			c += 2
@@ -133,9 +133,9 @@ def printMenu():
 
 chromePath = "/home/dom/Downloads/chromedriver"
 
-driver = webdriver.Chrome(chromePath)
-driver.maximize_window()
-driver.get('http://localhost:8080/')
+# driver = webdriver.Chrome(chromePath)
+# driver.maximize_window()
+# driver.get('http://localhost:8080/')
 
 # reading multiple xml files in order
 toolsPath = "all-tools" # whole directory of all tools
@@ -148,6 +148,8 @@ testDataList = []
 for file in items:
 	v, toolName, dformat = retrieveValues(file)
 	
+	print(toolName)
+
 	# for checking
 	for i in range(0, len(v)):			# each test tag
 		
@@ -156,72 +158,72 @@ for file in items:
 		'''
 
 		for j in range(0, len(v[i])): 	# each param tag
-			# print("\n")
-			# print("test name: ", v[i][j].n)
-			# print("test data type: ", v[i][j].dt)
-			# print("test value: ", v[i][j].v)
+			print("\n")
+			print("test name: ", v[i][j].n)
+			print("test data type: ", v[i][j].dt)
+			print("test value: ", v[i][j].v)
 		
-			# Uploading of file given a certain dformat
-			getDataLabel = driver.find_element_by_xpath("//*[@id='title_getext']/a")
+			# # Uploading of file given a certain dformat
+			# getDataLabel = driver.find_element_by_xpath("//*[@id='title_getext']/a")
 
-			inputPattern = re.match(r'^input(\d)*?$', v[i][j].n) # matching only the word "input" plus 0 or more integer 
+			# inputPattern = re.match(r'^input(\d)*?$', v[i][j].n) # matching only the word "input" plus 0 or more integer 
 
-			if ((inputPattern) and (v[i][j].dt not in testDataList)): # preventing multiple uploads of same test data
+			# if ((inputPattern) and (v[i][j].dt not in testDataList)): # preventing multiple uploads of same test data
 
-				testDataDirectory = "/home/dom/Desktop/test-galaxy/test-data/"
-				testFile = v[i][j].dt
-				testData = testDataDirectory + testFile
+			# 	testDataDirectory = "/home/dom/Desktop/test-galaxy/test-data/"
+			# 	testFile = v[i][j].dt
+			# 	testData = testDataDirectory + testFile
 
-				# Get Data	
-				getDataLabel.click()
+			# 	# Get Data	
+			# 	getDataLabel.click()
 
-				# Upload File
-				uploadFileLabel = driver.find_element_by_xpath("//*[@id='getext']/div[3]/div/a")
-				uploadFileLabel.click()
+			# 	# Upload File
+			# 	uploadFileLabel = driver.find_element_by_xpath("//*[@id='getext']/div[3]/div/a")
+			# 	uploadFileLabel.click()
 
-				driver.find_element_by_xpath("//*[@id='s2id_autogen1']/a").click()
-				field = driver.find_element_by_xpath("//*[@id='s2id_autogen2_search']")
+			# 	driver.find_element_by_xpath("//*[@id='s2id_autogen1']/a").click()
+			# 	field = driver.find_element_by_xpath("//*[@id='s2id_autogen2_search']")
 				
-				if (dformat == "tabular"):
-					field.send_keys(dformat)
-					field.send_keys(Keys.DOWN)
-					field.send_keys(Keys.ENTER)
-				elif (dformat == "txt"):
-					field.send_keys(dformat)
-					field.send_keys(Keys.ENTER)
+			# 	if (dformat == "tabular"):
+			# 		field.send_keys(dformat)
+			# 		field.send_keys(Keys.DOWN)
+			# 		field.send_keys(Keys.ENTER)
+			# 	elif (dformat == "txt"):
+			# 		field.send_keys(dformat)
+			# 		field.send_keys(Keys.ENTER)
 
 
-				uploadTestData = driver.find_element_by_xpath("//*[@id='regular']/div/div[2]/input")
-				uploadTestData.send_keys(testData)
+			# 	uploadTestData = driver.find_element_by_xpath("//*[@id='regular']/div/div[2]/input")
+			# 	uploadTestData.send_keys(testData)
 
-				testDataList.append(testFile) # preventing multiple uploads of same test data
+			# 	testDataList.append(testFile) # preventing multiple uploads of same test data
 
-				startButton = driver.find_element_by_xpath("//*[@id='btn-start']")
-				startButton.click()
+			# 	startButton = driver.find_element_by_xpath("//*[@id='btn-start']")
+			# 	startButton.click()
 
-				time.sleep(5) # wait for full upload
+			# 	time.sleep(5) # wait for full upload
 
-				closeButton = driver.find_element_by_xpath("//*[@id='btn-close']")
-				closeButton.click()
+			# 	closeButton = driver.find_element_by_xpath("//*[@id='btn-close']")
+			# 	closeButton.click()
 
-				time.sleep(5)
+			# 	time.sleep(5)
 
-				getDataLabel.click() # reclicks Get Data label
+			# 	getDataLabel.click() # reclicks Get Data label
 				
-				
-		'''
-			Automation
-		'''
-
-	# another for loop
-
-
-
-
-
-
-	break	
+	break
+	#print("Done uploading test data!")	
 	
+	# automation
+
+	#for i in range(0, len(v)):
+
+
+
+
+
+
+
+
 
 
 
