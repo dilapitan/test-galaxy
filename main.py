@@ -7,6 +7,7 @@ import xml.etree.ElementTree as ET
 import os
 import glob
 import time
+import re
 
 # XML parsing and retrieving values
 def retrieveValues(file):
@@ -154,8 +155,6 @@ for file in items:
 			Uploads ALL the necessary data
 		'''
 
-		getDataLabel = driver.find_element_by_xpath("/html/body/div[1]/div[5]/div[2]/div/div[1]/div[2]/div[1]/a")
-
 		for j in range(0, len(v[i])): 	# each param tag
 			# print("\n")
 			# print("test name: ", v[i][j].n)
@@ -163,10 +162,13 @@ for file in items:
 			# print("test value: ", v[i][j].v)
 		
 			# Uploading of file given a certain dformat
+			getDataLabel = driver.find_element_by_xpath("//*[@id='title_getext']/a")
 
-			if (v[i][j].dt not in testDataList): # preventing multiple uploads of same test data
+			inputPattern = re.match(r'^input(\d)*?$', v[i][j].n) # matching only the word "input" plus 0 or more integer 
 
-				testDataDirectory = "/home/dom/Desktop/test-galaxy/test-data/" 
+			if ((inputPattern) and (v[i][j].dt not in testDataList)): # preventing multiple uploads of same test data
+
+				testDataDirectory = "/home/dom/Desktop/test-galaxy/test-data/"
 				testFile = v[i][j].dt
 				testData = testDataDirectory + testFile
 
@@ -174,7 +176,6 @@ for file in items:
 				getDataLabel.click()
 
 				# Upload File
-
 				uploadFileLabel = driver.find_element_by_xpath("//*[@id='getext']/div[3]/div/a")
 				uploadFileLabel.click()
 
@@ -185,6 +186,10 @@ for file in items:
 					field.send_keys(dformat)
 					field.send_keys(Keys.DOWN)
 					field.send_keys(Keys.ENTER)
+				elif (dformat == "txt"):
+					field.send_keys(dformat)
+					field.send_keys(Keys.ENTER)
+
 
 				uploadTestData = driver.find_element_by_xpath("//*[@id='regular']/div/div[2]/input")
 				uploadTestData.send_keys(testData)
@@ -192,22 +197,23 @@ for file in items:
 				testDataList.append(testFile) # preventing multiple uploads of same test data
 
 				startButton = driver.find_element_by_xpath("//*[@id='btn-start']")
-				startButton.click();
+				startButton.click()
 
-				time.sleep(3) # wait for full upload
+				time.sleep(5) # wait for full upload
 
 				closeButton = driver.find_element_by_xpath("//*[@id='btn-close']")
-				closeButton.click();
+				closeButton.click()
 
-				time.sleep(7)
+				time.sleep(5)
 
 				getDataLabel.click() # reclicks Get Data label
-
-		# print(testDataList)
-
+				
+				
 		'''
 			Automation
 		'''
+
+	# another for loop
 
 
 

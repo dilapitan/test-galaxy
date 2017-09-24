@@ -38,7 +38,7 @@ python '$__tool_directory__/trimmer.py' -a -f '$input1' -c $col -s $start -e $en
     </outputs>
     <tests>
         <test>
-           <param name="input1" value="trimmer_tab_delimited.dat"/>
+           <param name="input1" value="1.bed"/>
            <param name="col" value="0"/>
            <param name="start" value="1"/>
            <param name="end" value="13"/>
@@ -47,7 +47,7 @@ python '$__tool_directory__/trimmer.py' -a -f '$input1' -c $col -s $start -e $en
            <output name="out_file1" file="trimmer_a_f_c0_s1_e13_i62.dat"/>
         </test>
         <test>
-           <param name="input1" value="trimmer_tab_delimited.dat"/>
+           <param name="input1" value="1.bed"/>
            <param name="col" value="2"/>
            <param name="start" value="1"/>
            <param name="end" value="2"/>
@@ -56,7 +56,7 @@ python '$__tool_directory__/trimmer.py' -a -f '$input1' -c $col -s $start -e $en
            <output name="out_file1" file="trimmer_a_f_c2_s1_e2_i62.dat"/>
         </test>
         <test>
-           <param name="input1" value="trimmer_tab_delimited.dat"/>
+           <param name="input1" value="1.bed"/>
            <param name="col" value="2"/>
            <param name="start" value="2"/>
            <param name="end" value="-2"/>
