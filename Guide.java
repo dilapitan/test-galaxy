@@ -43,7 +43,7 @@ public class Galaxy {
 		System.exit(0);
 		
 		
-		/*// clicks 'Get Data'
+		// clicks 'Get Data'
 		WebElement getDataLabel = driver.findElement(By.xpath("/html/body/div[1]/div[5]/div[2]/div/div[1]/div[2]/div[1]/a"));
 		getDataLabel.click();
 		
@@ -350,7 +350,7 @@ public class Galaxy {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-		}*/
+		}
 		
 	}
 
