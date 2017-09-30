@@ -135,8 +135,8 @@ chromePath = "/home/dom/Downloads/chromedriver"
 
 driver = webdriver.Chrome(chromePath)
 driver.maximize_window()
-#driver.get('http://localhost:8080/')
-driver.get('http://localhost:8080/?tool_id=secure_hash_message_digest&version=0.0.1&__identifer=h7ktcro3v0t')
+driver.get('http://localhost:8080/')
+#driver.get('http://localhost:8080/?tool_id=secure_hash_message_digest&version=0.0.1&__identifer=h7ktcro3v0t')
 
 # reading multiple xml files in order
 toolsPath = "all-tools" # whole directory of all tools
@@ -151,139 +151,159 @@ testDataList = []
 	uploads ALL the necessary data
 '''
 
-# for file in items:
-# 	v, toolName, dformat = retrieveValues(file)
-	
-# 	print(toolName)
-
-# 	for i in range(0, len(v)):			# each test tag
-		
-# 		for j in range(0, len(v[i])): 	# each param tag
-# 			# for checking
-
-# 			# print("\n")
-# 			# print("test name: ", v[i][j].n)
-# 			# print("test data type: ", v[i][j].dt)
-# 			# print("test value: ", v[i][j].v)
-		
-# 			# Uploading of file given a certain dformat
-# 			getDataLabel = driver.find_element_by_xpath("//*[@id='title_getext']/a")
-
-# 			inputPattern = re.match(r'^input(\d)*?$', v[i][j].n) # matching only the word "input" plus 0 or more integer 
-
-# 			if ((inputPattern) and (v[i][j].dt not in testDataList)): # preventing multiple uploads of same test data
-
-# 				testDataDirectory = "/home/dom/Desktop/test-galaxy/test-data/"
-# 				testFile = v[i][j].dt
-# 				testData = testDataDirectory + testFile
-
-# 				# Get Data	
-# 				getDataLabel.click()
-
-# 				# Upload File
-# 				uploadFileLabel = driver.find_element_by_xpath("//*[@id='getext']/div[3]/div/a")
-# 				uploadFileLabel.click()
-
-# 				driver.find_element_by_xpath("//*[@id='s2id_autogen1']/a").click()
-# 				field = driver.find_element_by_xpath("//*[@id='s2id_autogen2_search']")
-				
-# 				if (dformat == "tabular"):
-# 					field.send_keys(dformat)
-# 					field.send_keys(Keys.DOWN)
-# 					field.send_keys(Keys.ENTER)
-# 				elif (dformat == "txt"):
-# 					field.send_keys(dformat)
-# 					field.send_keys(Keys.ENTER)
-
-
-# 				uploadTestData = driver.find_element_by_xpath("//*[@id='regular']/div/div[2]/input")
-# 				uploadTestData.send_keys(testData)
-
-# 				testDataList.append(testFile) # preventing multiple uploads of same test data
-
-# 				startButton = driver.find_element_by_xpath("//*[@id='btn-start']")
-# 				startButton.click()
-
-# 				time.sleep(5) # wait for full upload
-
-# 				closeButton = driver.find_element_by_xpath("//*[@id='btn-close']")
-# 				closeButton.click()
-
-# 				time.sleep(5)
-
-# 				getDataLabel.click() # reclicks Get Data label
-	
-# '''
-# 	automation of values after all data tests have been uploaded
-# '''
-
-# print("Done uploading test data!")	
-
-time.sleep(3)
-
 for file in items:
 	v, toolName, dformat = retrieveValues(file)
-
-	# automation
-
-	for i in range(0, len(v)):
-		for j in range(0, len(v[i])):
-
-			# different conditions for automation
-			# based on data type (e.g. text, data, select, etc.)
-
-			dataType = v[i][j].dt
-			testValue = v[i][j].v 
-			if (dataType == "text"): 
-				try:
-					inputField = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]")
-					inputField.send_keys(Keys.CONTROL + "a")
-					inputField.send_keys(Keys.DELETE)
-					inputField.send_keys(testValue)
-					inputField.send_keys(Keys.TAB)
-				except NoSuchElementException:
-					print("")				
-
-			elif (dataType == "select"): # for select
-
-				try: # for check boxes
-					lists = driver.find_elements_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]/div")
-					indexPath = 0 # to be used later for xpath
-					listSize = len(lists)
-
-					for t in range(0, listSize):
-						wb = lists[t]
-						if ((wb.text) == testValue):
-							indexPath = t+1
-							break
-
-					origPath = "//*[starts-with(@id, 'field-uid')]/div[3]/div[xxx]/label" 	# 'xxx' is the variable that will be replaced by the indexPath
-					ii = str(indexPath)
-					newPath = origPath.replace("xxx", ii)
-					
-					wb = driver.find_element_by_xpath(newPath)
-					wb.click()
-
-				except NoSuchElementException: # for dropdown
-					
-					dropDown = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]") 
-					dropDown.click()
-					dropDownField = driver.find_element_by_xpath("//*[@id='s2id_autogen5_search']")
-					dropDownField.send_keys(testValue)
-					dropDownField.send_keys(Keys.ENTER)
-
-			elif (dataType == "boolean"):
-				try:
-					if (testValue == "true"):
-						booleanButton = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]/label[1]")
-						booleanButton.click()
-					elif (testValue == "false"):
-						booleanButton = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]/label[2]")
-						booleanButton.click()
-				except NoSuchElementException:
-					print("")
 	
-	break
+	print(toolName)
+
+	for i in range(0, len(v)):			# each test tag
+		
+		for j in range(0, len(v[i])): 	# each param tag
+			# for checking
+
+			# print("\n")
+			# print("test name: ", v[i][j].n)
+			# print("test data type: ", v[i][j].dt)
+			# print("test value: ", v[i][j].v)
+		
+			# Uploading of file given a certain dformat
+			getDataLabel = driver.find_element_by_xpath("//*[@id='title_getext']/a")
+
+			inputPattern = re.match(r'^input(\d)*?$', v[i][j].n) # matching only the word "input" plus 0 or more integer 
+
+			if ((inputPattern) and (v[i][j].dt not in testDataList)): # preventing multiple uploads of same test data
+
+				testDataDirectory = "/home/dom/Desktop/test-galaxy/test-data/"
+				testFile = v[i][j].v
+				testData = testDataDirectory + testFile
+
+				# Get Data	
+				getDataLabel.click()
+
+				# Upload File
+				uploadFileLabel = driver.find_element_by_xpath("//*[@id='getext']/div[3]/div/a")
+				uploadFileLabel.click()
+
+				driver.find_element_by_xpath("//*[@id='s2id_autogen1']/a").click()
+				field = driver.find_element_by_xpath("//*[@id='s2id_autogen2_search']")
+				
+				if (dformat == "tabular"):
+					field.send_keys(dformat)
+					field.send_keys(Keys.DOWN)
+					field.send_keys(Keys.ENTER)
+				elif (dformat == "txt"):
+					field.send_keys(dformat)
+					field.send_keys(Keys.ENTER)
+
+
+				uploadTestData = driver.find_element_by_xpath("//*[@id='regular']/div/div[2]/input")
+				uploadTestData.send_keys(testData)
+
+				break
+
+				testDataList.append(testFile) # preventing multiple uploads of same test data
+
+				startButton = driver.find_element_by_xpath("//*[@id='btn-start']")
+				startButton.click()
+
+				time.sleep(5) # wait for full upload
+
+				closeButton = driver.find_element_by_xpath("//*[@id='btn-close']")
+				closeButton.click()
+
+				time.sleep(5)
+
+				getDataLabel.click() # reclicks Get Data label
+	
+print("Done uploading test data!")	
+
+'''
+	automation of values after all data tests have been uploaded
+'''
+
+# time.sleep(3)
+
+# historyPanel = [] # container of the history panel (results/right side of Galaxy)
+
+# for file in items:	# whole xml directory under a specific category of tool
+# 	v, toolName, dformat = retrieveValues(file) # per xml file
+
+# 	# automation
+
+# 	for i in range(0, len(v)): 			# whole test tags
+# 		for j in range(0, len(v[i])): 	# per test tag
+
+# 			# different conditions for automation
+# 			# based on data type (e.g. text, data, select, etc.)
+
+# 			dataType = v[i][j].dt
+# 			testValue = v[i][j].v 
+# 			if (dataType == "text"): 
+# 				try:
+# 					inputField = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]")
+# 					inputField.send_keys(Keys.CONTROL + "a")
+# 					inputField.send_keys(Keys.DELETE)
+# 					inputField.send_keys(testValue)
+# 					inputField.send_keys(Keys.TAB)
+# 				except NoSuchElementException:
+# 					print("")				
+
+# 			elif (dataType == "select"): # for select
+
+# 				try: # for check boxes
+# 					lists = driver.find_elements_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]/div")
+# 					indexPath = 0 # to be used later for xpath
+# 					listSize = len(lists)
+
+# 					for t in range(0, listSize):
+# 						wb = lists[t]
+# 						if ((wb.text) == testValue):
+# 							indexPath = t+1
+# 							break
+
+# 					origPath = "//*[starts-with(@id, 'field-uid')]/div[3]/div[xxx]/label" 	# 'xxx' is the variable that will be replaced by the indexPath
+# 					ii = str(indexPath)
+# 					newPath = origPath.replace("xxx", ii)
+					
+# 					wb = driver.find_element_by_xpath(newPath)
+# 					wb.click()
+
+# 				except NoSuchElementException: # for dropdown
+					
+# 					dropDown = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]") 
+# 					dropDown.click()
+# 					dropDownField = driver.find_element_by_xpath("//*[@id='s2id_autogen5_search']")
+# 					dropDownField.send_keys(testValue)
+# 					dropDownField.send_keys(Keys.ENTER)
+
+# 			elif (dataType == "boolean"):
+# 				try:
+# 					if (testValue == "true"):
+# 						booleanButton = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]/label[1]")
+# 						booleanButton.click()
+# 					elif (testValue == "false"):
+# 						booleanButton = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]/label[2]")
+# 						booleanButton.click()
+# 				except NoSuchElementException:
+# 					print("")
+	
+	
+# 		# clicking of button
+# 		print("Executing the tool...")
+# 		executeButton =  driver.find_element_by_xpath("//*[@id='execute']")
+# 		executeButton.click()
+
+# 		time.sleep(5) # wait for the changes to render
+
+# 		# checking of result
+
+# 		try:
+# 			outputDiv = driver.find_element_by_xpath("//*[starts-with(@id, 'dataset-')]")
+# 			historyPanel.append(outputDiv)
+# 		except NoSuchElementException:
+# 			print("No element.")
+
+
 
 
 
