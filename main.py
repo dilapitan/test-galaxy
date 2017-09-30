@@ -136,7 +136,7 @@ chromePath = "/home/dom/Downloads/chromedriver"
 driver = webdriver.Chrome(chromePath)
 driver.maximize_window()
 #driver.get('http://localhost:8080/')
-driver.get('http://localhost:8080/?tool_id=addValue&version=1.0.0&__identifer=zvdw14opqb')
+driver.get('http://localhost:8080/?tool_id=secure_hash_message_digest&version=0.0.1&__identifer=h7ktcro3v0t')
 
 # reading multiple xml files in order
 toolsPath = "all-tools" # whole directory of all tools
@@ -219,7 +219,7 @@ testDataList = []
 
 # print("Done uploading test data!")	
 
-time.sleep(5)
+time.sleep(3)
 
 for file in items:
 	v, toolName, dformat = retrieveValues(file)
@@ -235,21 +235,25 @@ for file in items:
 			dataType = v[i][j].dt
 			testValue = v[i][j].v 
 			if (dataType == "text"): 
-				inputField = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]")
-				inputField.send_keys(Keys.CONTROL + "a")
-				inputField.send_keys(Keys.DELETE)
-				inputField.send_keys(testValue)
-				inputField.send_keys(Keys.TAB)
+				try:
+					inputField = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]")
+					inputField.send_keys(Keys.CONTROL + "a")
+					inputField.send_keys(Keys.DELETE)
+					inputField.send_keys(testValue)
+					inputField.send_keys(Keys.TAB)
+				except NoSuchElementException:
+					print("")				
 
 			elif (dataType == "select"): # for select
-				try:
-					lists = driver.find_element_by_css_selector("div.ui-option")
+
+				try: # for check boxes
+					lists = driver.find_elements_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]/div")
 					indexPath = 0 # to be used later for xpath
 					listSize = len(lists)
 
 					for t in range(0, listSize):
 						wb = lists[t]
-						if (wb == testValue):
+						if ((wb.text) == testValue):
 							indexPath = t+1
 							break
 
@@ -262,13 +266,23 @@ for file in items:
 
 				except NoSuchElementException: # for dropdown
 					
-					print("here")
 					dropDown = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]") 
 					dropDown.click()
 					dropDownField = driver.find_element_by_xpath("//*[@id='s2id_autogen5_search']")
 					dropDownField.send_keys(testValue)
 					dropDownField.send_keys(Keys.ENTER)
-			
+
+			elif (dataType == "boolean"):
+				try:
+					if (testValue == "true"):
+						booleanButton = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]/label[1]")
+						booleanButton.click()
+					elif (testValue == "false"):
+						booleanButton = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]/label[2]")
+						booleanButton.click()
+				except NoSuchElementException:
+					print("")
+	
 	break
 
 
