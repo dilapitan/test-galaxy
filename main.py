@@ -124,6 +124,8 @@ def printMenu():
 # 	toolTypePath = "statistics"
 # elif (choice == 9):
 # 	toolTypePath = "text-man-xml-files"
+#	selectorsList = ("cat1", "ChangeCase", "Convert", "createInterval", "Cut1", "addValue", "Show beginning1", "mergeCols1", "Paste1", "random_lines1", "Remove beginning1", "secure_hash_message_digest", "Show tail1", "trimmer", "wc_gnu")
+#	label = "//*[@id='title_textutil']/a"
 # elif (choice == 0):
 # 	print("Program now exiting...")
 # 	exit()
@@ -136,11 +138,14 @@ chromePath = "/home/dom/Downloads/chromedriver"
 driver = webdriver.Chrome(chromePath)
 driver.maximize_window()
 driver.get('http://localhost:8080/')
-#driver.get('http://localhost:8080/?tool_id=secure_hash_message_digest&version=0.0.1&__identifer=h7ktcro3v0t')
 
 # reading multiple xml files in order
 toolsPath = "all-tools" # whole directory of all tools
+
+# remove later
 toolTypePath = "text-man-xml-files"
+selectorsList = ("cat1", "ChangeCase", "Convert", "createInterval", "Cut1", "addValue", "Show beginning1", "mergeCols1", "Paste1", "random_lines1", "Remove beginning1", "secure_hash_message_digest", "Show tail1", "trimmer", "wc_gnu")
+
 directory = toolsPath + "/" + toolTypePath
 
 items = glob.glob(directory + "/*.xml")
@@ -199,8 +204,6 @@ for file in items:
 				uploadTestData = driver.find_element_by_xpath("//*[@id='regular']/div/div[2]/input")
 				uploadTestData.send_keys(testData)
 
-				break
-
 				testDataList.append(testFile) # preventing multiple uploads of same test data
 
 				startButton = driver.find_element_by_xpath("//*[@id='btn-start']")
@@ -221,87 +224,106 @@ print("Done uploading test data!")
 	automation of values after all data tests have been uploaded
 '''
 
-# time.sleep(3)
+time.sleep(3)
 
-# historyPanel = [] # container of the history panel (results/right side of Galaxy)
+# clicking the category of the tool picked
+label = driver.find_element_by_xpath("//*[@id='title_textutil']/a")
+label.click() 
 
-# for file in items:	# whole xml directory under a specific category of tool
-# 	v, toolName, dformat = retrieveValues(file) # per xml file
+selectorsList = ["addValue"]
+slcounter = 0
+historyPanel = [] # container of the history panel (results/right side of Galaxy)
 
-# 	# automation
+for file in items:	# whole xml directory under a specific category of tool
+	v, toolName, dformat = retrieveValues(file) # per xml file
 
-# 	for i in range(0, len(v)): 			# whole test tags
-# 		for j in range(0, len(v[i])): 	# per test tag
+	# automation
 
-# 			# different conditions for automation
-# 			# based on data type (e.g. text, data, select, etc.)
+	preSelector = selectorsList[slcounter]
+	replacedSpace = preSelector.replace(" ", ".")
+	mainSelector = "a." + replacedSpace
 
-# 			dataType = v[i][j].dt
-# 			testValue = v[i][j].v 
-# 			if (dataType == "text"): 
-# 				try:
-# 					inputField = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]")
-# 					inputField.send_keys(Keys.CONTROL + "a")
-# 					inputField.send_keys(Keys.DELETE)
-# 					inputField.send_keys(testValue)
-# 					inputField.send_keys(Keys.TAB)
-# 				except NoSuchElementException:
-# 					print("")				
+	slcounter += 1
 
-# 			elif (dataType == "select"): # for select
+	randomLabel = driver.find_element_by_css_selector(mainSelector)
+	randomLabel.click()
 
-# 				try: # for check boxes
-# 					lists = driver.find_elements_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]/div")
-# 					indexPath = 0 # to be used later for xpath
-# 					listSize = len(lists)
+	time.sleep(2)
 
-# 					for t in range(0, listSize):
-# 						wb = lists[t]
-# 						if ((wb.text) == testValue):
-# 							indexPath = t+1
-# 							break
+	for i in range(0, len(v)): 			# whole test tags
+		for j in range(0, len(v[i])): 	# per test tag
 
-# 					origPath = "//*[starts-with(@id, 'field-uid')]/div[3]/div[xxx]/label" 	# 'xxx' is the variable that will be replaced by the indexPath
-# 					ii = str(indexPath)
-# 					newPath = origPath.replace("xxx", ii)
+			# different conditions for automation
+			# based on data type (e.g. text, data, select, etc.)
+
+			dataType = v[i][j].dt
+			testValue = v[i][j].v 
+			if (dataType == "text"): 
+				#print("text")
+				try:
+					inputField = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid-')]")
+					inputField.send_keys(Keys.CONTROL + "a")
+					inputField.send_keys(Keys.DELETE)
+					inputField.send_keys(testValue)
+					inputField.send_keys(Keys.TAB)
+				except NoSuchElementException:
+					print("No element.")				
+
+			elif (dataType == "select"): # for select
+
+				try: # for check boxes
+					lists = driver.find_elements_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]/div")
+					indexPath = 0 # to be used later for xpath
+					listSize = len(lists)
+
+					for t in range(0, listSize):
+						wb = lists[t]
+						if ((wb.text) == testValue):
+							indexPath = t+1
+							break
+
+					origPath = "//*[starts-with(@id, 'field-uid')]/div[3]/div[xxx]/label" 	# 'xxx' is the variable that will be replaced by the indexPath
+					ii = str(indexPath)
+					newPath = origPath.replace("xxx", ii)
 					
-# 					wb = driver.find_element_by_xpath(newPath)
-# 					wb.click()
+					wb = driver.find_element_by_xpath(newPath)
+					wb.click()
 
-# 				except NoSuchElementException: # for dropdown
+				except NoSuchElementException: # for dropdown
 					
-# 					dropDown = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]") 
-# 					dropDown.click()
-# 					dropDownField = driver.find_element_by_xpath("//*[@id='s2id_autogen5_search']")
-# 					dropDownField.send_keys(testValue)
-# 					dropDownField.send_keys(Keys.ENTER)
+					print("dropdown")
+					dropDown = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]") 
+					dropDown.click()
+					dropDownField = driver.find_element_by_xpath("//*[@id='s2id_autogen374_search']")
+					dropDownField.send_keys(testValue)
+					dropDownField.send_keys(Keys.ENTER)
 
-# 			elif (dataType == "boolean"):
-# 				try:
-# 					if (testValue == "true"):
-# 						booleanButton = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]/label[1]")
-# 						booleanButton.click()
-# 					elif (testValue == "false"):
-# 						booleanButton = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]/label[2]")
-# 						booleanButton.click()
-# 				except NoSuchElementException:
-# 					print("")
+			elif (dataType == "boolean"):
+				try:
+					if (testValue == "true"):
+						booleanButton = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]/label[1]")
+						booleanButton.click()
+					elif (testValue == "false"):
+						booleanButton = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]/label[2]")
+						booleanButton.click()
+				except NoSuchElementException:
+					print("")
 	
 	
-# 		# clicking of button
-# 		print("Executing the tool...")
-# 		executeButton =  driver.find_element_by_xpath("//*[@id='execute']")
-# 		executeButton.click()
+		# clicking of button
+		print("Executing the tool...")
+		executeButton =  driver.find_element_by_xpath("//*[@id='execute']")
+		executeButton.click()
 
-# 		time.sleep(5) # wait for the changes to render
+		time.sleep(5) # wait for the changes to render
 
-# 		# checking of result
+		# checking of result
 
-# 		try:
-# 			outputDiv = driver.find_element_by_xpath("//*[starts-with(@id, 'dataset-')]")
-# 			historyPanel.append(outputDiv)
-# 		except NoSuchElementException:
-# 			print("No element.")
+		try:
+			outputDiv = driver.find_element_by_xpath("//*[starts-with(@id, 'dataset-')]")
+			historyPanel.append(outputDiv)
+		except NoSuchElementException:
+			print("No element.")
 
 
 
