@@ -36,13 +36,13 @@
     <tests>
         <test>
           <param name="input1" value="1.bed"/>
-          <param name="options" value="lines,words,characters"/>
+          <param name="options" value="lines"/>
           <param name="include_header" value="True"/>
           <output name="out_file1" file="wc_gnu_out_1.tabular"/>
         </test>
         <test>
           <param name="input1" value="1.bed"/>
-          <param name="options" value="lines,words,characters"/>
+          <param name="options" value="lines"/>
           <param name="include_header" value="False"/>
           <output name="out_file1" file="wc_gnu_out_2.tabular"/>
         </test>

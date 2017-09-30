@@ -176,7 +176,7 @@ for file in items:
 
 			inputPattern = re.match(r'^input(\d)*?$', v[i][j].n) # matching only the word "input" plus 0 or more integer 
 
-			if ((inputPattern) and (v[i][j].dt not in testDataList)): # preventing multiple uploads of same test data
+			if ((inputPattern) and (v[i][j].v not in testDataList)): # preventing multiple uploads of same test data
 
 				testDataDirectory = "/home/dom/Desktop/test-galaxy/test-data/"
 				testFile = v[i][j].v
@@ -217,6 +217,7 @@ for file in items:
 				time.sleep(5)
 
 				getDataLabel.click() # reclicks Get Data label
+
 	
 print("Done uploading test data!")	
 
@@ -230,7 +231,7 @@ time.sleep(3)
 label = driver.find_element_by_xpath("//*[@id='title_textutil']/a")
 label.click() 
 
-selectorsList = ["addValue"]
+selectorsList = ["wc_gnu"]
 slcounter = 0
 historyPanel = [] # container of the history panel (results/right side of Galaxy)
 
@@ -245,6 +246,8 @@ for file in items:	# whole xml directory under a specific category of tool
 
 	slcounter += 1
 
+	print("main selector: ", mainSelector)
+	time.sleep(2)
 	randomLabel = driver.find_element_by_css_selector(mainSelector)
 	randomLabel.click()
 
@@ -276,6 +279,7 @@ for file in items:	# whole xml directory under a specific category of tool
 					indexPath = 0 # to be used later for xpath
 					listSize = len(lists)
 
+					
 					for t in range(0, listSize):
 						wb = lists[t]
 						if ((wb.text) == testValue):
@@ -286,19 +290,28 @@ for file in items:	# whole xml directory under a specific category of tool
 					ii = str(indexPath)
 					newPath = origPath.replace("xxx", ii)
 					
-					wb = driver.find_element_by_xpath(newPath)
-					wb.click()
+					print("start")
+					try:
+						wb = driver.find_element_by_xpath(newPath)
+						wb.click()
+					except NoSuchElementException:
+						print("")
 
 				except NoSuchElementException: # for dropdown
 					
-					print("dropdown")
 					dropDown = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]") 
 					dropDown.click()
 					dropDownField = driver.find_element_by_xpath("//*[@id='s2id_autogen374_search']")
 					dropDownField.send_keys(testValue)
 					dropDownField.send_keys(Keys.ENTER)
 
+
+					# dropDown = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid-')]/div[3]")
+					# dropDown.send_keys(testValue)
+					# dopDown.send_keys(Keys.TAB)
+
 			elif (dataType == "boolean"):
+				print("boolean")
 				try:
 					if (testValue == "true"):
 						booleanButton = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]/label[1]")
@@ -315,7 +328,7 @@ for file in items:	# whole xml directory under a specific category of tool
 		executeButton =  driver.find_element_by_xpath("//*[@id='execute']")
 		executeButton.click()
 
-		time.sleep(5) # wait for the changes to render
+		time.sleep(10) # wait for the changes to render
 
 		# checking of result
 
@@ -324,6 +337,46 @@ for file in items:	# whole xml directory under a specific category of tool
 			historyPanel.append(outputDiv)
 		except NoSuchElementException:
 			print("No element.")
+
+		historyPanelSize = len(historyPanel)
+
+		# accessing the top of stack of the history panel
+		currentOutputDiv = historyPanel[historyPanelSize - 1]
+		backgroundColor = currentOutputDiv.value_of_css_property("background-color")
+
+		backgroundColor = backgroundColor.replace("u'rgba", "")
+		backgroundColor = backgroundColor.replace(", 1)", ")")
+		backgroundColor = backgroundColor.replace("rbga", "")
+
+		#print(backgroundColor)
+
+		try:
+			divTitle = driver.find_element_by_css_selector("span.name")
+		except NoSuchElementException:
+			print("No element.")
+
+		if (backgroundColor == "rgba(176, 241, 176)"):
+			try:
+				time.sleep(5)
+				divTitle.click()
+
+				time.sleep(2)
+				
+				result = driver.find_element_by_css_selector("span.value")
+				resultText = result.text
+				
+				if (resultText == "error" or resultText == "no peek"):
+					print("note: ", resultText)
+				else:
+					print("okay")
+
+			except NoSuchElementException:
+				print("No element.")
+
+		else:
+			print("wrong color")
+
+		break
 
 
 
