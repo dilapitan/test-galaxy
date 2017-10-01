@@ -242,21 +242,20 @@ for file in items:	# whole xml directory under a specific category of tool
 
 	# automation
 
-	# getting the proper css selector for the specific tool
-	preSelector = selectorsList[slcounter]
-	replacedSpace = preSelector.replace(" ", ".")
-	mainSelector = "a." + replacedSpace
-
-	slcounter += 1
-
-	print("main selector: ", mainSelector)
-	time.sleep(2)
-	randomLabel = driver.find_element_by_css_selector(mainSelector)
-	randomLabel.click()
-
-	time.sleep(2)
-
 	for i in range(0, len(v)): 			# whole test tags
+		
+		# getting the proper css selector for the specific tool
+		preSelector = selectorsList[slcounter]
+		replacedSpace = preSelector.replace(" ", ".")
+		mainSelector = "a." + replacedSpace
+
+		print("main selector: ", mainSelector)
+		time.sleep(2)
+		randomLabel = driver.find_element_by_css_selector(mainSelector)
+		randomLabel.click()
+
+		time.sleep(2)
+
 		for j in range(0, len(v[i])): 	# per test tag
 
 			# different conditions for automation
@@ -390,7 +389,7 @@ for file in items:	# whole xml directory under a specific category of tool
 				print("Element not interactable.")
 			
 
-		break
+	slcounter += 1
 
 
 

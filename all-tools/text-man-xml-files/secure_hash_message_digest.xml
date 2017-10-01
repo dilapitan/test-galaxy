@@ -28,6 +28,11 @@
           <param name="algorithms" value="test"/>
           <output name="out_file1" file="secure_hash_message_digest_out1.tabular" />
         </test>
+        <test>
+          <param name="input1" value="1.bed"/>
+          <param name="algorithms" value="sha512"/>
+          <output name="out_file1" file="secure_hash_message_digest_out1.tabular" />
+        </test>
     </tests>
     <help>
 
