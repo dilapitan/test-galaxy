@@ -1,17 +1,9 @@
 Tool Category: Text Man XML Files
 
 Tool number: 1
-Tool name: Secure Hash / Message Digest
+Tool name: Add column
 
 Test Number: 1
 Status: True Positive.
 Note: None
-
-Test Number: 2
-Status: Tool Error.
-Error Message: 
-Traceback (most recent call last):
-  File "/home/dom/Desktop/irri/galaxy/tools/filters/secure_hash_message_digest.py", line 48, in <module>
-    __main__()
-  File "/home/dom/Desktop/irri/galaxy/tools/filters/secure_hash_message_digest.py", line 24, in __m
 

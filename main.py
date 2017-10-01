@@ -235,7 +235,7 @@ time.sleep(3)
 label = driver.find_element_by_xpath("//*[@id='title_textutil']/a")
 label.click() 
 
-selectorsList = ["secure_hash_message_digest"]
+selectorsList = ["addValue"]
 slcounter = 0
 historyPanel = [] # container of the history panel (results/right side of Galaxy)
 
@@ -296,7 +296,7 @@ for file in items:	# whole xml directory under a specific category of tool
 
 			dataType = v[i][j].dt
 			testValue = v[i][j].v 
-			if (dataType == "text"): 
+			if ((dataType == "text") or (dataType == "Integer") or (dataType == "float")): 
 				#print("text")
 				try:
 					inputField = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid-')]")
