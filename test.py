@@ -1,12 +1,9 @@
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
+of = open("output.txt", "w")
 
-chromePath = "/home/dom/Downloads/chromedriver"
-driver = webdriver.Chrome(chromePath)
-driver.get('http://www.facebook.com')
+word1 = "hello\n"
+word2 = "world\n"
 
-value = "domlapitan"
+final = word1 + word2
 
-username = driver.find_element(By.XPATH, '//*[@id="email"]')
-username.send_keys(value)
+of.write(final)
+of.close()

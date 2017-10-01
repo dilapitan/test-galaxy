@@ -127,6 +127,7 @@ def printMenu():
 # 	toolTypePath = "text-man-xml-files"
 #	selectorsList = ("cat1", "ChangeCase", "Convert", "createInterval", "Cut1", "addValue", "Show beginning1", "mergeCols1", "Paste1", "random_lines1", "Remove beginning1", "secure_hash_message_digest", "Show tail1", "trimmer", "wc_gnu")
 #	label = "//*[@id='title_textutil']/a"
+#	toolCategory = "Text Man XML Files"
 # elif (choice == 0):
 # 	print("Program now exiting...")
 # 	exit()
@@ -145,6 +146,7 @@ toolsPath = "all-tools" # whole directory of all tools
 
 # remove later
 toolTypePath = "text-man-xml-files"
+toolCategory = "Text Man XML Files\n"
 selectorsList = ("cat1", "ChangeCase", "Convert", "createInterval", "Cut1", "addValue", "Show beginning1", "mergeCols1", "Paste1", "random_lines1", "Remove beginning1", "secure_hash_message_digest", "Show tail1", "trimmer", "wc_gnu")
 
 directory = toolsPath + "/" + toolTypePath
@@ -237,13 +239,44 @@ selectorsList = ["secure_hash_message_digest"]
 slcounter = 0
 historyPanel = [] # container of the history panel (results/right side of Galaxy)
 
+of = open("output.txt", "w") # for file writing
+
+# file writing
+string = "Tool Category: "
+toolCategory = toolCategory + "\n"
+finalString = string + toolCategory
+of.write(finalString)
+
 for file in items:	# whole xml directory under a specific category of tool
+	
 	v, toolName, dformat = retrieveValues(file) # per xml file
+
+	# file writing for Tool Number
+	temp = slcounter + 1
+	temp = str(temp)
+	temp = temp + "\n"
+	string = "Tool number: "
+	finalString = string + temp
+	of.write(finalString)
+
+	# file writing for Tool Name
+	string = "Tool name: "
+	temp = toolName + "\n\n"
+	finalString = string + temp
+	of.write(finalString)
 
 	# automation
 
 	for i in range(0, len(v)): 			# whole test tags
 		
+		# file writing of Test Tag Number
+		string = "Test Number: "
+		temp = i+1
+		temp = str(temp)
+		temp = temp + "\n"
+		finalString = string + temp
+		of.write(finalString)
+
 		# getting the proper css selector for the specific tool
 		preSelector = selectorsList[slcounter]
 		replacedSpace = preSelector.replace(" ", ".")
@@ -256,7 +289,7 @@ for file in items:	# whole xml directory under a specific category of tool
 
 		time.sleep(2)
 
-		for j in range(0, len(v[i])): 	# per test tag
+		for j in range(0, len(v[i])): 	# per test tag (within)
 
 			# different conditions for automation
 			# based on data type (e.g. text, data, select, etc.)
@@ -365,10 +398,26 @@ for file in items:	# whole xml directory under a specific category of tool
 				result = driver.find_element_by_css_selector("span.value")
 				resultText = result.text
 				
-				if (resultText == "error" or resultText == "no peek"): # catching false correct
+				if (resultText == "error" or resultText == "no peek"): # catching false positive
+					print("False positive.")
 					print("note: ", resultText)
+
+					# file writing of result of false positive
+					string = "Status: False Positive.\n"
+					of.write(string)
+					string = "Note: \n"
+					temp = resultText + "\n"
+					finalString = string + temp
+					of.write(finalString)
+
 				else:
 					print("Tool Success.") # if tool has no error
+
+					# file writing of result of True Positive
+					string = "Status: True Positive.\n"
+					of.write(string)
+					string = "Note: None\n"
+					of.write(string)
 
 			except NoSuchElementException:
 				print("No element.")
@@ -382,6 +431,13 @@ for file in items:	# whole xml directory under a specific category of tool
 				print("Error message: ")
 				print(errorMessage)
 
+				# file writing of result of Error
+				string = "Status: Tool Error.\n"
+				of.write(string)
+				string = "Error Message: \n"
+				temp = errorMessage + "\n"
+				finalString = string + temp
+				of.write(finalString)
 
 			except NoSuchElementException:
 				print("No element.")
@@ -389,13 +445,12 @@ for file in items:	# whole xml directory under a specific category of tool
 				print("Element not interactable.")
 			
 
+		# file writing of space
+		string = "\n"
+		of.write(string)
+
 	slcounter += 1
 
-
-
-
-
-
-
+of.close() # closes the output file
 
 
