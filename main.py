@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import ElementNotInteractableException
 
 import xml.etree.ElementTree as ET
 import os
@@ -199,7 +200,8 @@ for file in items:
 				elif (dformat == "txt"):
 					field.send_keys(dformat)
 					field.send_keys(Keys.ENTER)
-
+				else:
+					print("Error. Not in the options.") 
 
 				uploadTestData = driver.find_element_by_xpath("//*[@id='regular']/div/div[2]/input")
 				uploadTestData.send_keys(testData)
@@ -231,7 +233,7 @@ time.sleep(3)
 label = driver.find_element_by_xpath("//*[@id='title_textutil']/a")
 label.click() 
 
-selectorsList = ["wc_gnu"]
+selectorsList = ["secure_hash_message_digest"]
 slcounter = 0
 historyPanel = [] # container of the history panel (results/right side of Galaxy)
 
@@ -240,6 +242,7 @@ for file in items:	# whole xml directory under a specific category of tool
 
 	# automation
 
+	# getting the proper css selector for the specific tool
 	preSelector = selectorsList[slcounter]
 	replacedSpace = preSelector.replace(" ", ".")
 	mainSelector = "a." + replacedSpace
@@ -352,29 +355,40 @@ for file in items:	# whole xml directory under a specific category of tool
 
 		try:
 			divTitle = driver.find_element_by_css_selector("span.name")
+			time.sleep(5)
+			divTitle.click() # clicking the lable of the result
+			time.sleep(2)
 		except NoSuchElementException:
 			print("No element.")
 
-		if (backgroundColor == "rgba(176, 241, 176)"):
+		if (backgroundColor == "rgba(176, 241, 176)"): # if green
 			try:
-				time.sleep(5)
-				divTitle.click()
-
-				time.sleep(2)
-				
 				result = driver.find_element_by_css_selector("span.value")
 				resultText = result.text
 				
-				if (resultText == "error" or resultText == "no peek"):
+				if (resultText == "error" or resultText == "no peek"): # catching false correct
 					print("note: ", resultText)
 				else:
-					print("okay")
+					print("Tool Success.") # if tool has no error
 
 			except NoSuchElementException:
 				print("No element.")
 
-		else:
-			print("wrong color")
+		elif (backgroundColor == "rgba(249, 199, 197)"): # if red
+			print("Tool Error.") # if tool has error
+
+			try:
+				errorDiv = driver.find_element_by_css_selector("div.job-error-text")
+				errorMessage = errorDiv.text # get the error text
+				print("Error message: ")
+				print(errorMessage)
+
+
+			except NoSuchElementException:
+				print("No element.")
+			except ElementNotInteractableException:
+				print("Element not interactable.")
+			
 
 		break
 
