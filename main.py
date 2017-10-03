@@ -242,10 +242,13 @@ print("Done uploading test data!")
 time.sleep(3)
 
 # clicking the category of the tool picked
-label = driver.find_element_by_xpath("//*[@id='title_textutil']/a")
+label = driver.find_element_by_xpath("//*[@id='title_filter']/a")
+
+# //*[@id='title_textutil']/a - Text Man
+# //*[@id='title_filter']/a - Filter and Sort
 label.click() 
 
-selectorsList = [] # put the id's here
+selectorsList = ["sort1"] # put the id's here
 slcounter = 0
 historyPanel = [] # container of the history panel (results/right side of Galaxy)
 
@@ -299,6 +302,10 @@ for file in items:	# whole xml directory under a specific category of tool
 
 		time.sleep(2)
 
+		# flag for dropboxes
+		arrayFlagForDropboxes = []
+		flagForDropboxes = 0
+
 		for j in range(0, len(v[i])): 	# per test tag (within)
 
 			# different conditions for automation
@@ -324,7 +331,8 @@ for file in items:	# whole xml directory under a specific category of tool
 					indexPath = 0 # to be used later for xpath
 					listSize = len(lists)
 
-					
+					print("Performing checkbox...")
+
 					for t in range(0, listSize):
 						wb = lists[t]
 						if ((wb.text) == testValue):
@@ -334,22 +342,23 @@ for file in items:	# whole xml directory under a specific category of tool
 					origPath = "//*[starts-with(@id, 'field-uid')]/div[3]/div[xxx]/label" 	# 'xxx' is the variable that will be replaced by the indexPath
 					ii = str(indexPath)
 					newPath = origPath.replace("xxx", ii)
-					
-					try:
-						wb = driver.find_element_by_xpath(newPath)
-						wb.click()
-					except NoSuchElementException:
-						print("No element (check box).")
+									
+					wb = driver.find_element_by_xpath(newPath)
+					wb.click()
 
 				except NoSuchElementException: # for dropdown
 					
-					dropDown = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]") 
-					dropDown.click()
-					dropDownField = driver.find_element_by_xpath("//*[@id='s2id_autogen374_search']")
-					dropDownField.send_keys(testValue)
-					dropDownField.send_keys(Keys.ENTER)
+					print("Skippping dropdown since it already has default values...")
 
-
+					# while (True):
+					# 	dropDownField = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid-')]/div[3]") 
+					# 	if (dropDownField not in arrayFlagForDropboxes):
+					# 		dropDownField.click()
+					# 		dropDownField2 = driver.find_element_by_xpath("//*[@id='s2id_autogen374_search']")
+					# 		dropDownField2.send_keys(testValue)
+					# 		dropDownField2.send_keys(Keys.ENTER)
+					# 		arrayFlagForDropboxes.append(dropDownField)
+					
 					# dropDown = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid-')]/div[3]")
 					# dropDown.send_keys(testValue)
 					# dopDown.send_keys(Keys.TAB)

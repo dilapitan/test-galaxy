@@ -23,13 +23,13 @@
       <param name="header_lines" value="0"/>
       <output name="out_file1" file="filter1_test1.bed"/>
     </test>
-    <test>
+    <!-- <test>
       <param name="input" value="7.bed"/>
       <param name="cond" value="c1=='chr1' and c3-c2>=2000 and c6=='+'"/>
       <param name="header_lines" value="0"/>
       <output name="out_file1" file="filter1_test2.bed"/>
     </test>
-    <!-- Test filtering of file with a variable number of columns. -->
+    Test filtering of file with a variable number of columns.
     <test>
       <param name="input" value="filter1_in3.sam"/>
       <param name="cond" value="c3=='chr1' and c5>5"/>
@@ -47,7 +47,7 @@
       <param name="cond" value="c8>500"/>
       <param name="header_lines" value="1"/>
       <output name="out_file1" file="filter1_test5.tab"/>
-    </test>
+    </test> -->
   </tests>
   <help>
 

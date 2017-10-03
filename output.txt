@@ -1,20 +1,6 @@
-Tool Category: Text Man XML Files
+Tool Category: Filter and Sort
 
 Tool number: 1
-Tool name: Concatenate datasets
+Tool name: Sort
 
 Test Number: 1
-Status: True Positive.
-Note: None
-
-Tool number: 2
-Tool name: Change Case
-
-Test Number: 1
-Status: True Positive.
-Note: None
-
-Test Number: 2
-Status: True Positive.
-Note: None
-
