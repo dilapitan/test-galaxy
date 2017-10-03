@@ -162,6 +162,7 @@ testDataList = []
 for file in items:
 	v, toolName, dformat = retrieveValues(file)
 	
+	print("Tool name: ")
 	print(toolName)
 
 	for i in range(0, len(v)):			# each test tag
@@ -238,7 +239,7 @@ time.sleep(3)
 label = driver.find_element_by_xpath("//*[@id='title_textutil']/a")
 label.click() 
 
-selectorsList = ["ChangeCase"]
+selectorsList = []
 slcounter = 0
 historyPanel = [] # container of the history panel (results/right side of Galaxy)
 
@@ -299,16 +300,16 @@ for file in items:	# whole xml directory under a specific category of tool
 
 			dataType = v[i][j].dt
 			testValue = v[i][j].v 
+
 			if ((dataType == "text") or (dataType == "Integer") or (dataType == "float")): 
 				#print("text")
 				try:
 					inputField = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid-')]")
-					inputField.send_keys(Keys.CONTROL + "a")
-					inputField.send_keys(Keys.DELETE)
+					inputField.clear()
 					inputField.send_keys(testValue)
 					inputField.send_keys(Keys.TAB)
 				except NoSuchElementException:
-					print("No element.")				
+					print("No element (text).")				
 
 			elif (dataType == "select"): # for select
 
@@ -328,12 +329,11 @@ for file in items:	# whole xml directory under a specific category of tool
 					ii = str(indexPath)
 					newPath = origPath.replace("xxx", ii)
 					
-					print("start")
 					try:
 						wb = driver.find_element_by_xpath(newPath)
 						wb.click()
 					except NoSuchElementException:
-						print("")
+						print("No element (check box).")
 
 				except NoSuchElementException: # for dropdown
 					
@@ -358,7 +358,7 @@ for file in items:	# whole xml directory under a specific category of tool
 						booleanButton = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]/label[2]")
 						booleanButton.click()
 				except NoSuchElementException:
-					print("")
+					print("No element (boolean).")
 	
 	
 		# clicking of button

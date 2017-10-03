@@ -43,7 +43,7 @@ python '$__tool_directory__/trimmer.py' -a -f '$input1' -c $col -s $start -e $en
            <param name="start" value="1"/>
            <param name="end" value="13"/>
            <param name="fastq" value="No"/>
-           <param name="ignore" value="62"/>
+           <param name="ignore" value="64"/>
            <output name="out_file1" file="trimmer_a_f_c0_s1_e13_i62.dat"/>
         </test>
         <test>
@@ -52,7 +52,7 @@ python '$__tool_directory__/trimmer.py' -a -f '$input1' -c $col -s $start -e $en
            <param name="start" value="1"/>
            <param name="end" value="2"/>
            <param name="fastq" value="No"/>
-           <param name="ignore" value="62"/>
+           <param name="ignore" value="64"/>
            <output name="out_file1" file="trimmer_a_f_c2_s1_e2_i62.dat"/>
         </test>
         <test>
@@ -61,7 +61,7 @@ python '$__tool_directory__/trimmer.py' -a -f '$input1' -c $col -s $start -e $en
            <param name="start" value="2"/>
            <param name="end" value="-2"/>
            <param name="fastq" value="No"/>
-           <param name="ignore" value="62"/>
+           <param name="ignore" value="64"/>
            <output name="out_file1" file="trimmer_a_f_c2_s2_e-2_i62.dat"/>
         </test>
     </tests>
