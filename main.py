@@ -147,8 +147,8 @@ driver.get('http://localhost:8080/')
 toolsPath = "all-tools" # whole directory of all tools
 
 # remove later
-toolTypePath = "filter-and-sort"
-toolCategory = "Filter and Sort\n"
+toolTypePath = "graph-display-data"
+toolCategory = "\n"
 selectorsList = ("cat1", "ChangeCase", "Convert", "createInterval", "Cut1", "addValue", "Show beginning1", "mergeCols1", "Paste1", "random_lines1", "Remove beginning1", "secure_hash_message_digest", "Show tail1", "trimmer", "wc_gnu")
 
 directory = toolsPath + "/" + toolTypePath
@@ -167,9 +167,9 @@ for file in items:
 	print("Tool name: ")
 	print(toolName)
 
-	# print("\nData format: ")
-	# print(dformat)
-	# print("")
+	print("\nData format: ")
+	print(dformat)
+	print("")
 
 	for i in range(0, len(v)):			# each test tag
 		
@@ -209,7 +209,7 @@ for file in items:
 					field.send_keys(dformat)
 					field.send_keys(Keys.DOWN)
 					field.send_keys(Keys.ENTER)
-				elif ((dformat == "txt") or (dformat == "gff") or (dformat == "gtf")):
+				elif ((dformat == "txt") or (dformat == "gff") or (dformat == "gtf") or (dformat == "bed")):
 					field.send_keys(dformat)
 					field.send_keys(Keys.ENTER)	
 				else:
@@ -242,13 +242,18 @@ print("Done uploading test data!")
 time.sleep(3)
 
 # clicking the category of the tool picked
-label = driver.find_element_by_xpath("//*[@id='title_filter']/a")
+label = driver.find_element_by_xpath("//*[@id='title_plots']/a")
 
 # //*[@id='title_textutil']/a - Text Man
 # //*[@id='title_filter']/a - Filter and Sort
+# //*[@id='title_group']/a - Join, Subtract, and Group
+# //*[@id='title_features']/a - Extract
+# //*[@id='title_fetchSeq']/a - Fetch Sequences
+# //*[@id='title_stats']/a - Statistics
+# //*[@id='title_plots']/a
 label.click() 
 
-selectorsList = ["gtf_filter_by_attribute_values_list"] # put the id's here
+selectorsList = ["Summary_Statistics1"] # put the id's here
 slcounter = 0
 historyPanel = [] # container of the history panel (results/right side of Galaxy)
 
@@ -298,6 +303,7 @@ for file in items:	# whole xml directory under a specific category of tool
 		print("main selector: ", mainSelector)
 		time.sleep(2)
 		randomLabel = driver.find_element_by_css_selector(mainSelector)
+		#randomLabel = driver.find_element_by_xpath("//*[@id='fetchSeq']/div[3]/div/a")
 		randomLabel.click()
 
 		time.sleep(2)

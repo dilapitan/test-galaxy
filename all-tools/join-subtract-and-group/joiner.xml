@@ -19,8 +19,8 @@
         <option value="no_fill" selected="True">No</option>
         <option value="fill_empty">Yes</option>
       </param>
-     <when value="no_fill">
-        <!-- do nothing -->
+     <!-- <when value="no_fill">
+        do nothing
      </when>
      <when value="fill_empty">
        <param type="select" name="fill_columns_by" label="Only fill unjoined rows">
@@ -46,7 +46,7 @@
            </repeat>
          </when>
        </conditional>
-     </when>
+     </when> -->
    </conditional>
   </inputs>
   <configfiles>

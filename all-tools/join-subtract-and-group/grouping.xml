@@ -19,7 +19,7 @@
     <param name="ignorecase" type="boolean" truevalue="1" falsevalue="0">
       <label>Ignore case while grouping?</label>
     </param>
-    <param name="ignorelines" type="select" display="checkboxes" multiple="True" label="Ignore lines beginning with these characters" help="lines beginning with these are not grouped">
+    <!-- <param name="ignorelines" type="select" display="checkboxes" multiple="True" label="Ignore lines beginning with these characters" help="lines beginning with these are not grouped">
             <option value="62">&gt;</option>
             <option value="64">@</option>
             <option value="43">+</option>
@@ -57,7 +57,7 @@
          <option value="no">NO</option>
          <option value="yes">YES</option>
        </param>
-    </repeat>
+    </repeat> -->
   </inputs>
   <outputs>
     <data format="tabular" name="out_file1" />
@@ -71,9 +71,9 @@
       <param name="input1" value="1.bed"/>
       <param name="groupcol" value="1"/>
       <param name="ignorecase" value="true"/>
-      <param name="optype" value="mean"/>
-      <param name="opcol" value="2"/>
-      <param name="opround" value="no"/>
+     <!--  <param name="optype" value="mean"/>
+     <param name="opcol" value="2"/>
+     <param name="opround" value="no"/> -->
       <output name="out_file1" file="groupby_out1.dat"/>
     </test>
     <!-- Long case but test framework doesn't allow yet

@@ -18,8 +18,8 @@
   </outputs>
   <tests>
     <test>
-      <param name="input1" value="3.bed" /> 
       <param name="region" value="transcribed" />
+      <param name="input1" value="3.bed" /> 
       <output name="out_file1" file="cf-gene2exon.dat"/>
     </test>
   </tests>

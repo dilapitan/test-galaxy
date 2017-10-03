@@ -22,8 +22,8 @@
   <tests>
     <test>
       <param name="input" value="1.bed"/>
-      <output name="out_file1" file="gsummary_out1.tabular"/>
       <param name="cond" value="c2"/>
+      <output name="out_file1" file="gsummary_out1.tabular"/>
     </test>
   </tests>
   <help>
