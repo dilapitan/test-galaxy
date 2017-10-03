@@ -1,9 +1,13 @@
 Tool Category: Text Man XML Files
 
 Tool number: 1
-Tool name: Add column
+Tool name: Change Case
 
 Test Number: 1
+Status: True Positive.
+Note: None
+
+Test Number: 2
 Status: True Positive.
 Note: None
 

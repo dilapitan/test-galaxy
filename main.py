@@ -188,11 +188,14 @@ for file in items:
 				# Get Data	
 				getDataLabel.click()
 
+				time.sleep(1)
+
 				# Upload File
 				uploadFileLabel = driver.find_element_by_xpath("//*[@id='getext']/div[3]/div/a")
 				uploadFileLabel.click()
 
 				driver.find_element_by_xpath("//*[@id='s2id_autogen1']/a").click()
+
 				field = driver.find_element_by_xpath("//*[@id='s2id_autogen2_search']")
 				
 				if (dformat == "tabular"):
@@ -235,7 +238,7 @@ time.sleep(3)
 label = driver.find_element_by_xpath("//*[@id='title_textutil']/a")
 label.click() 
 
-selectorsList = ["addValue"]
+selectorsList = ["ChangeCase"]
 slcounter = 0
 historyPanel = [] # container of the history panel (results/right side of Galaxy)
 
