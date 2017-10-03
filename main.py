@@ -45,14 +45,16 @@ def retrieveValues(file):
 
 	inputsParamValues = []
 	dataFormat = ""
+	dataFormatFlag = 0
 	for testCount in range(0, testLength): # for catching multiple <test>
 		for inputsParam in inputsParams:
 			inputsNameText = inputsParam.get('name')
 			inputsTypeText = inputsParam.get('type')
 
 			data = inputsParam.get('format')
-			if (data != None):
+			if (data != None) and (dataFormatFlag == 0):
 				dataFormat = data
+				dataFormatFlag = 1
 
 			inputsParamValues.append(inputsNameText)
 			inputsParamValues.append(inputsTypeText)
@@ -145,8 +147,8 @@ driver.get('http://localhost:8080/')
 toolsPath = "all-tools" # whole directory of all tools
 
 # remove later
-toolTypePath = "text-man-xml-files"
-toolCategory = "Text Man XML Files\n"
+toolTypePath = "filter-and-sort"
+toolCategory = "Filter and Sort\n"
 selectorsList = ("cat1", "ChangeCase", "Convert", "createInterval", "Cut1", "addValue", "Show beginning1", "mergeCols1", "Paste1", "random_lines1", "Remove beginning1", "secure_hash_message_digest", "Show tail1", "trimmer", "wc_gnu")
 
 directory = toolsPath + "/" + toolTypePath
@@ -164,6 +166,10 @@ for file in items:
 	
 	print("Tool name: ")
 	print(toolName)
+
+	# print("\nData format: ")
+	# print(dformat)
+	# print("")
 
 	for i in range(0, len(v)):			# each test tag
 		
@@ -203,9 +209,9 @@ for file in items:
 					field.send_keys(dformat)
 					field.send_keys(Keys.DOWN)
 					field.send_keys(Keys.ENTER)
-				elif (dformat == "txt"):
+				elif ((dformat == "txt") or (dformat == "gff") or (dformat == "gtf")):
 					field.send_keys(dformat)
-					field.send_keys(Keys.ENTER)
+					field.send_keys(Keys.ENTER)	
 				else:
 					print("Error. Not in the options.") 
 
@@ -239,7 +245,7 @@ time.sleep(3)
 label = driver.find_element_by_xpath("//*[@id='title_textutil']/a")
 label.click() 
 
-selectorsList = []
+selectorsList = [] # put the id's here
 slcounter = 0
 historyPanel = [] # container of the history panel (results/right side of Galaxy)
 

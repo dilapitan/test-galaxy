@@ -19,14 +19,14 @@
     <tests>
         <!-- Test filtering with a simple list of values. -->
         <test>
-            <param name="input" value="gops_subtract_in1.gff"/>
+            <param name="input" value="5.gff"/>
             <param name="attribute_name" value="gene_id"/>
             <param name="ids" value="gtf_filter_by_attribute_values_list_in1.txt"/>
             <output name="output" file="gtf_filter_by_attribute_values_list_out1.gtf"/>
         </test>
         <!-- Test filtering with a more complex tabular file. -->
         <test>
-            <param name="input" value="gtf_filter_by_attribute_values_list_in2.gtf"/>
+            <param name="input" value="5.gff"/>
             <param name="attribute_name" value="transcript_id"/>
             <param name="ids" value="gtf_filter_by_attribute_values_list_in3.tabular"/>
             <output name="output" file="gtf_filter_by_attribute_values_list_out2.gtf"/>

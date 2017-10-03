@@ -14,12 +14,12 @@
   </outputs>
   <tests>
     <test>
-        <param name="input" value="gff_filter_attr_in1.gff"/>
+        <param name="input" value="5.gff"/>
         <param name="cond" value="conf_lo>0"/>
         <output name="out_file1" file="gff_filter_by_attribute_out1.gff"/>
     </test>
     <test>
-        <param name="input" value="gff_filter_attr_in1.gff"/>
+        <param name="input" value="5.gff"/>
         <param name="cond" value="conf_lo==0 or conf_hi>125"/>
         <output name="out_file1" file="gff_filter_by_attribute_out2.gff"/>
     </test>

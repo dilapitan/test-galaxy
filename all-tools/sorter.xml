@@ -46,7 +46,7 @@
             <option value="DESC">Descending order</option>
             <option value="ASC">Ascending order</option>
         </param>
-        <repeat name="column_set" title="Column selection">
+        <!-- <repeat name="column_set" title="Column selection">
             <param name="other_column" label="on column" type="data_column" data_ref="input" accept_default="true" />
             <param name="other_style" type="select" label="with flavor">
                 <option value="num">Numerical sort</option>
@@ -57,23 +57,23 @@
                 <option value="DESC">Descending order</option>
                 <option value="ASC">Ascending order</option>
             </param>
-        </repeat>
+        </repeat> -->
     </inputs>
     <outputs>
         <data format="input" name="out_file1" metadata_source="input"/>
     </outputs>
     <tests>
         <test>
-            <param name="input" value="sort_in1.bed"/>
+            <param name="input" value="1.bed"/>
             <param name="column" value="1"/>
             <param name="style" value="alpha"/>
             <param name="order" value="ASC"/>
-            <param name="other_column" value="3"/>
+            <!-- <param name="other_column" value="3"/>
             <param name="other_style" value="num"/>
-            <param name="other_order" value="DESC"/>
+            <param name="other_order" value="DESC"/> -->
             <output name="out_file1" file="sort_out1.bed"/>
         </test>
-        <test>
+        <!-- <test>
             <param name="input" value="sort_in1.bed"/>
             <param name="column" value="1"/>
             <param name="style" value="alpha"/>
@@ -89,7 +89,7 @@
             <param name="style" value="gennum"/>
             <param name="order" value="ASC"/>
             <output name="out_file1" file="sort_out3.bed"/>
-        </test>
+        </test> -->
     </tests>
     <help>
 .. class:: infomark

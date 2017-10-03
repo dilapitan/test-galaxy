@@ -22,7 +22,7 @@
   <tests>
       <!-- Test GTF filtering. -->
       <test>
-          <param name="input_file1" value="gops_subtract_in1.gff"/>
+          <param name="input_file1" value="5.gff"/>
           <param name="feature_name" value="exon"/>
           <param name="cond" value=">1"/>
           <output name="out_file1" file="gff_filter_by_feature_count_out1.gff"/>

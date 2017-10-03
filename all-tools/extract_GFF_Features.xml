@@ -11,7 +11,7 @@
         <option value="6">Column 7 / Strand</option>
         <option value="7">Column 8 / Frame</option>
       </param>
-      <when value="0">
+      <!-- <when value="0">
         <param name="feature" type="select" multiple="true" label="Extract features" help="Multi-select list - hold the appropriate key while clicking to select multiple columns">
           <options from_dataset="input1">
             <column name="name" index="0"/>
@@ -19,8 +19,8 @@
             <filter type="unique_value" name="unique" column="0"/>
           </options>
         </param>
-      </when>
-      <when value="1">
+      </when> -->
+      <!-- <when value="1">
         <param name="feature" type="select" multiple="true" label="Extract features" help="Multi-select list - hold the appropriate key while clicking to select multiple columns">
           <options from_dataset="input1">
             <column name="name" index="1"/>
@@ -28,8 +28,8 @@
             <filter type="unique_value" name="unique" column="1"/>
           </options>
         </param>
-      </when>
-      <when value="2">
+      </when> -->
+      <!-- <when value="2">
         <param name="feature" type="select" multiple="true" label="Extract features" help="Multi-select list - hold the appropriate key while clicking to select multiple columns">
           <options from_dataset="input1">
             <column name="name" index="2"/>
@@ -55,7 +55,7 @@
             <filter type="unique_value" name="unique" column="7"/>
           </options>
         </param>
-      </when>
+      </when> -->
     </conditional>
   </inputs>
   <outputs>
@@ -64,8 +64,8 @@
   <tests>
     <test>
       <param name="input1" value="5.gff"/>
-      <param name="col" value="0" />
-      <param name="feature" value="chr5,chr6,chr7,chr8" />
+      <param name="col" value="1" />
+      <!-- <param name="feature" value="chr5,chr6,chr7,chr8" /> -->
       <output name="out_file1" file="Extract_features1_out.gff"/>
     </test>
   </tests>
