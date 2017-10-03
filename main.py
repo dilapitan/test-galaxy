@@ -248,7 +248,7 @@ label = driver.find_element_by_xpath("//*[@id='title_filter']/a")
 # //*[@id='title_filter']/a - Filter and Sort
 label.click() 
 
-selectorsList = ["sort1"] # put the id's here
+selectorsList = ["gtf_filter_by_attribute_values_list"] # put the id's here
 slcounter = 0
 historyPanel = [] # container of the history panel (results/right side of Galaxy)
 
@@ -316,13 +316,15 @@ for file in items:	# whole xml directory under a specific category of tool
 
 			if ((dataType == "text") or (dataType == "Integer") or (dataType == "float")): 
 				#print("text")
-				try:
-					inputField = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid-')]")
-					inputField.clear()
-					inputField.send_keys(testValue)
-					inputField.send_keys(Keys.TAB)
-				except NoSuchElementException:
-					print("No element (text).")				
+				# try:
+				# 	inputField = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid-')]")
+				# 	inputField.click()
+				# 	inputField.clear()
+				# 	inputField.send_keys(testValue)
+				# 	inputField.send_keys(Keys.TAB)
+				# except NoSuchElementException:
+				# 	print("No element (text).")
+				print("Skipping this to since it has already input values")				
 
 			elif (dataType == "select"): # for select
 
@@ -416,7 +418,7 @@ for file in items:	# whole xml directory under a specific category of tool
 				result = driver.find_element_by_css_selector("span.value")
 				resultText = result.text
 				
-				if (resultText == "error" or resultText == "no peek"): # catching false positive
+				if (resultText == "empty" or resultText == "no peek"): # catching false positive
 					print("False positive.")
 					print("note: ", resultText)
 

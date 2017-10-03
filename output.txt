@@ -1,6 +1,21 @@
 Tool Category: Filter and Sort
 
 Tool number: 1
-Tool name: Sort
+Tool name: Filter GTF data by attribute values_list
 
 Test Number: 1
+Status: Tool Error.
+Error Message: 
+Traceback (most recent call last):
+  File "/home/dom/Desktop/irri/galaxy/tools/filters/gff/gtf_filter_by_attribute_values_list.py", line 71, in <module>
+    gff_filter(gff_file, attribute_name, ids_file, output_file)
+  File "/home/dom/Desktop/irri/galaxy
+
+Test Number: 2
+Status: Tool Error.
+Error Message: 
+Traceback (most recent call last):
+  File "/home/dom/Desktop/irri/galaxy/tools/filters/gff/gtf_filter_by_attribute_values_list.py", line 71, in <module>
+    gff_filter(gff_file, attribute_name, ids_file, output_file)
+  File "/home/dom/Desktop/irri/galaxy
+

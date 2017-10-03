@@ -4,34 +4,34 @@
     gff_filter_by_feature_count.py $input_file1 $out_file1 "$feature_name" "$cond"
   </command>
   <inputs>
-    <param format="gff" name="input_file1" type="data" label="Filter"/>
+    <param format="gff" name="input1" type="data" label="Filter"/>
     <param name="feature_name" type="select" label="Using feature name">
-        <options from_dataset="input_file1">
+        <options from_dataset="input1">
             <column name="name" index="2"/>
             <column name="value" index="2"/>
             <filter type="unique_value" name="unique" column="2"/>
         </options>
     </param>
-    <param name="cond" size="40" type="text" value=">0" label="With following condition">
+    <param name="cond" size="40" type="text" value="1" label="With following condition">
       <validator type="empty_field" message="Enter a valid filtering condition, see syntax and examples below."/>
     </param>
   </inputs>
   <outputs>
-    <data format="input" name="out_file1" metadata_source="input_file1"/>
+    <data format="input" name="out_file1" metadata_source="input1"/>
   </outputs>
   <tests>
       <!-- Test GTF filtering. -->
       <test>
-          <param name="input_file1" value="5.gff"/>
+          <param name="input1" value="5.gff"/>
           <param name="feature_name" value="exon"/>
-          <param name="cond" value=">1"/>
+          <param name="cond" value="1"/>
           <output name="out_file1" file="gff_filter_by_feature_count_out1.gff"/>
       </test>
       <!-- Test GFF3 filtering. -->
       <test>
-          <param name="input_file1" value="5.gff3"/>
+          <param name="input1" value="5.gff3"/>
           <param name="feature_name" value="HSP"/>
-          <param name="cond" value=">=5"/>
+          <param name="cond" value="=5"/>
           <output name="out_file1" file="gff_filter_by_feature_count_out2.gff"/>
       </test>
   </tests>
