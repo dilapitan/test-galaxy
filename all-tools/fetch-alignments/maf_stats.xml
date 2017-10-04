@@ -24,7 +24,7 @@ python '$__tool_directory__/maf_stats.py' $maf_source_type.maf_source
         <option value="cached" selected="true">Locally Cached Alignments</option>
         <option value="user">Alignments in Your History</option>
       </param>
-      <when value="user">
+      <!-- <when value="user">
         <param format="maf" name="input2" label="MAF File" type="data">
           <options>
             <filter type="data_meta" ref="input1" key="dbkey" />
@@ -42,7 +42,7 @@ python '$__tool_directory__/maf_stats.py' $maf_source_type.maf_source
             <validator type="no_options" message="No alignments are available for the build associated with the selected interval file"/>
           </options>
         </param>
-      </when>
+      </when> -->
     </conditional>
     <param name="summary" type="select" label="Type of Output">
       <option value="false" selected="true">Coverage by Region</option>
@@ -60,17 +60,17 @@ python '$__tool_directory__/maf_stats.py' $maf_source_type.maf_source
     <test>
       <param name="input1" value="1.bed" dbkey="hg17" ftype="bed"/>
       <param name="maf_source" value="cached"/>
-      <param name="mafType" value="8_WAY_MULTIZ_hg17"/>
-      <output name="out_file1" file="maf_stats_interval_out.dat"/>
       <param name="summary" value="false"/>
+      <output name="out_file1" file="maf_stats_interval_out.dat"/>
+      <!-- <param name="mafType" value="8_WAY_MULTIZ_hg17"/> -->
     </test>
-    <test>
+    <!-- <test>
       <param name="input1" value="1.bed" dbkey="hg17" ftype="bed"/>
       <param name="maf_source" value="cached"/>
-      <param name="mafType" value="8_WAY_MULTIZ_hg17"/>
-      <output name="out_file1" file="maf_stats_summary_out.dat"/>
       <param name="summary" value="true"/>
-    </test>
+      <output name="out_file1" file="maf_stats_summary_out.dat"/>
+      <param name="mafType" value="8_WAY_MULTIZ_hg17"/>
+    </test> -->
   </tests>
   <help>
 **What it does**

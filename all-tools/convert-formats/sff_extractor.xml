@@ -28,7 +28,7 @@
     </outputs>
     <tests>
         <test>
-            <param name="input" value="2.sff"/>
+            <param name="input" value="1.sff"/>
             <param name="clip" value=""/>
             <param name="fastq_output" value="false"/>
             <output name="out_file2" file="sff_converter_xml_1.dat"/>
@@ -36,7 +36,7 @@
             <output name="out_file4" file="sff_converter_qual.dat"/>
         </test>
         <test>
-            <param name="input" value="2.sff"/>
+            <param name="input" value="1.sff"/>
             <param name="clip" value=""/>
             <param name="fastq_output" value="true"/>
             <output name="out_file1" file="sff_converter_fastq.dat"/>

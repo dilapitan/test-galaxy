@@ -6,12 +6,12 @@
   <command>python '$__tool_directory__/maf_to_interval.py' '${input1}' '${out_file1}' '${out_file1.id}' '.' '${input1.dbkey}' '${species}' '${input1.metadata.species}' ${complete_blocks} ${remove_gaps}</command>
   <inputs>
     <param format="maf" name="input1" type="data" label="MAF file to convert"/>
-    <param name="species" type="select" label="Select additional species" display="checkboxes" multiple="true" help="The species matching the dbkey of the alignment is always included. A separate history item will be created for each species.">
-      <options>
-        <filter type="data_meta" ref="input1" key="species" />
-        <filter type="remove_value" meta_ref="input1" key="dbkey" />
-      </options>
-    </param>
+   <!--  <param name="species" type="select" label="Select additional species" display="checkboxes" multiple="true" help="The species matching the dbkey of the alignment is always included. A separate history item will be created for each species.">
+     <options>
+       <filter type="data_meta" ref="input1" key="species" />
+       <filter type="remove_value" meta_ref="input1" key="dbkey" />
+     </options>
+   </param> -->
     <param name="complete_blocks" type="select" label="Exclude blocks which have a species missing">
       <option value="partial_allowed">include blocks with missing species</option>
       <option value="partial_disallowed">exclude blocks with missing species</option>
@@ -26,10 +26,10 @@
   </outputs>
   <tests>
     <test>
-      <param name="input1" value="4.maf" dbkey="hg17"/>
+      <param name="input1" value="3.maf" dbkey="hg17"/>
       <param name="complete_blocks" value="partial_disallowed"/>
       <param name="remove_gaps" value="keep_gaps"/>
-      <param name="species" value="panTro1" />
+      <!-- <param name="species" value="panTro1" /> -->
       <output name="out_file1" file="maf_to_interval_out_hg17.interval"/>
       <output name="out_file1" file="maf_to_interval_out_panTro1.interval"/>
     </test>

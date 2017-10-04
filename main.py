@@ -33,7 +33,6 @@ def retrieveValues(file):
 		testParamValues.append(testValueText)
 
 
-
 	'''
 		Getting the values from <input>
 	'''
@@ -59,8 +58,8 @@ def retrieveValues(file):
 			inputsParamValues.append(inputsNameText)
 			inputsParamValues.append(inputsTypeText)
 		
-	# print(testParamValues)
-	# print(inputsParamValues)
+	print(testParamValues)
+	print(inputsParamValues)
 
 	''' 
 		Object that will be passed for automation 
@@ -147,7 +146,7 @@ driver.get('http://localhost:8080/')
 toolsPath = "all-tools" # whole directory of all tools
 
 # remove later
-toolTypePath = "graph-display-data"
+toolTypePath = "convert-formats"
 toolCategory = "\n"
 selectorsList = ("cat1", "ChangeCase", "Convert", "createInterval", "Cut1", "addValue", "Show beginning1", "mergeCols1", "Paste1", "random_lines1", "Remove beginning1", "secure_hash_message_digest", "Show tail1", "trimmer", "wc_gnu")
 
@@ -205,11 +204,11 @@ for file in items:
 
 				field = driver.find_element_by_xpath("//*[@id='s2id_autogen2_search']")
 				
-				if (dformat == "tabular"):
+				if ((dformat == "tabular") or (dformat == "sff") or (dformat == "wig") or (dformat == "interval")):
 					field.send_keys(dformat)
 					field.send_keys(Keys.DOWN)
 					field.send_keys(Keys.ENTER)
-				elif ((dformat == "txt") or (dformat == "gff") or (dformat == "gtf") or (dformat == "bed")):
+				elif ((dformat == "txt") or (dformat == "gff") or (dformat == "lav") or (dformat == "gtf") or (dformat == "bed") or (dformat == "axt") or (dformat == "maf")):
 					field.send_keys(dformat)
 					field.send_keys(Keys.ENTER)	
 				else:
@@ -242,7 +241,7 @@ print("Done uploading test data!")
 time.sleep(3)
 
 # clicking the category of the tool picked
-label = driver.find_element_by_xpath("//*[@id='title_plots']/a")
+label = driver.find_element_by_xpath("//*[@id='title_convert']/a")
 
 # //*[@id='title_textutil']/a - Text Man
 # //*[@id='title_filter']/a - Filter and Sort
@@ -251,9 +250,10 @@ label = driver.find_element_by_xpath("//*[@id='title_plots']/a")
 # //*[@id='title_fetchSeq']/a - Fetch Sequences
 # //*[@id='title_stats']/a - Statistics
 # //*[@id='title_plots']/a
+# //*[@id='title_convert']/a
 label.click() 
 
-selectorsList = ["Summary_Statistics1"] # put the id's here
+selectorsList = ["MAF_To_Fasta1"] # put the id's here
 slcounter = 0
 historyPanel = [] # container of the history panel (results/right side of Galaxy)
 
@@ -412,6 +412,7 @@ for file in items:	# whole xml directory under a specific category of tool
 		#print(backgroundColor)
 
 		try:
+			time.sleep(2)
 			divTitle = driver.find_element_by_css_selector("span.name")
 			time.sleep(5)
 			divTitle.click() # clicking the lable of the result

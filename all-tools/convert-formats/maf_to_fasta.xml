@@ -18,7 +18,7 @@ python
         <option value="multiple" selected="true">Multiple Blocks</option>
         <option value="concatenated">One Sequence per Species</option>
       </param>
-      <when value="multiple">
+      <!-- <when value="multiple">
         <param name="species" type="select" label="Select species" display="checkboxes" multiple="true" help="checked taxa will be included in the output">
           <options>
             <filter type="data_meta" ref="input1" key="species" />
@@ -35,7 +35,7 @@ python
             <filter type="data_meta" ref="input1" key="species" />
           </options>
         </param>
-      </when>
+      </when> -->
     </conditional>
   </inputs>
   <outputs>
@@ -45,16 +45,16 @@ python
     <test>
       <param name="input1" value="3.maf" ftype="maf"/>
       <param name="fasta_type" value="concatenated"/>
-      <param name="species" value="canFam1"/>
+      <!-- <param name="species" value="canFam1"/> -->
       <output name="out_file1" file="cf_maf2fasta_concat.dat" ftype="fasta"/>
     </test>
-    <test>
+    <!-- <test>
       <param name="input1" value="4.maf" ftype="maf"/>
       <param name="fasta_type" value="multiple"/>
       <param name="species" value="hg17,panTro1,rheMac2,rn3,mm7,canFam2,bosTau2,dasNov1"/>
       <param name="complete_blocks" value="partial_allowed"/>
       <output name="out_file1" file="cf_maf2fasta_new.dat" ftype="fasta"/>
-    </test>
+    </test> -->
   </tests>
   <help>
 **Types of MAF to FASTA conversion**

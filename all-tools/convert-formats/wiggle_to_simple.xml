@@ -9,13 +9,13 @@
   </outputs>
   <tests>
     <test>
-      <param name="input" value="2.wig" />
+      <param name="input" value="1.wig" />
       <output name="out_file1" file="2.interval"/>
     </test>
-    <test>
-      <param name="input" value="3.wig" />
+    <!-- <test>
+      <param name="input" value="1.wig" />
       <output name="out_file1" file="3_wig.bed"/>
-    </test>
+    </test> -->
   </tests>
   <help>
 **Syntax**

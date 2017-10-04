@@ -6,11 +6,11 @@
   <command>python '$__tool_directory__/maf_reverse_complement.py' '$input1' '$out_file1' $species</command>
   <inputs>
         <param format="maf" name="input1" label="Alignment File" type="data"/>
-        <param name="species" type="select" display="checkboxes" multiple="true" label="Choose species" help="Select species to be included in the final alignment">
+        <!-- <param name="species" type="select" display="checkboxes" multiple="true" label="Choose species" help="Select species to be included in the final alignment">
           <options>
             <filter type="data_meta" ref="input1" key="species" />
           </options>
-        </param>
+        </param> -->
    </inputs>
   <outputs>
     <data format="maf" name="out_file1" metadata_source="input1"/>
@@ -18,7 +18,7 @@
   <tests>
     <test>
       <param name="input1" value="3.maf" dbkey="hg17" ftype="maf"/>
-      <param name="species" value="hg17,panTro1,mm5,rn3,canFam1"/>
+      <!-- <param name="species" value="hg17,panTro1,mm5,rn3,canFam1"/> -->
       <output name="out_file1" file="maf_reverse_complement_out.dat"/>
     </test>
   </tests>

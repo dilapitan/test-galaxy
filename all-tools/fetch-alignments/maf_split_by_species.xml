@@ -16,15 +16,15 @@
   </outputs>
   <tests>
     <test>
-      <param name="input1" value="maf_split_by_species_in.maf"/>
+      <param name="input1" value="3.maf"/>
       <param name="collapse_columns" value="True"/>
       <output name="out_file1" file="maf_split_by_species_collapsed_out.maf"/>
     </test>
-    <test>
+    <!-- <test>
       <param name="input1" value="maf_split_by_species_in.maf"/>
       <param name="collapse_columns" value="False"/>
       <output name="out_file1" file="maf_split_by_species_not_collapsed_out.maf"/>
-    </test>
+    </test> -->
   </tests>
   <help>
 **What it does**

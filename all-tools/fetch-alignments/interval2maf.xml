@@ -24,7 +24,7 @@ python '$__tool_directory__/interval2maf.py' --dbkey=${input1.dbkey} --chromCol=
         <option value="cached" selected="true">Locally Cached Alignments</option>
         <option value="user">Alignments in Your History</option>
       </param>
-      <when value="user">
+      <!-- <when value="user">
         <param format="maf" name="mafFile" label="Choose alignments" type="data">
           <options>
             <filter type="data_meta" ref="input1" key="dbkey" />
@@ -40,12 +40,10 @@ python '$__tool_directory__/interval2maf.py' --dbkey=${input1.dbkey} --chromCol=
       <when value="cached">
         <param name="mafType" type="select" label="Choose alignments">
           <options from_data_table="indexed_maf_files">
-            <!--
             <column name="name" index="0"/>
             <column name="value" index="1"/>
             <column name="dbkey" index="2"/>
             <column name="species" index="3"/>
-            -->
             <filter type="data_meta" ref="input1" key="dbkey" column="dbkey" multiple="True" separator=","/>
             <validator type="no_options" message="No alignments are available for the build associated with the selected interval file"/>
           </options>
@@ -59,22 +57,22 @@ python '$__tool_directory__/interval2maf.py' --dbkey=${input1.dbkey} --chromCol=
             <filter type="multiple_splitter" column="name" separator=","/>
           </options>
         </param>
-      </when>
+      </when> -->
     </conditional>
     <conditional name="split_blocks_by_species_selector">
       <param name="split_blocks_by_species" type="select" label="Split blocks by species" help="Not usually applicable. See help below for more information.">
         <option value="split_blocks_by_species">Split by species</option>
         <option value="dont_split_blocks_by_species" selected="true">Do not split</option>
       </param>
-      <when value="dont_split_blocks_by_species">
-        <!-- do nothing here -->
+      <!-- <when value="dont_split_blocks_by_species">
+        do nothing here
       </when>
       <when value="split_blocks_by_species">
         <param name="remove_all_gap_columns" type="select" label="Collapse empty alignment columns">
           <option value="remove_all_gap_columns" selected="true">Collapse empty columns</option>
           <option value="do_not_remove_all_gap_columns">Do not collapse</option>
         </param>
-      </when>
+      </when> -->
     </conditional>
    </inputs>
    <outputs>
@@ -84,12 +82,12 @@ python '$__tool_directory__/interval2maf.py' --dbkey=${input1.dbkey} --chromCol=
      <test>
        <param name="input1" value="1.bed"/>
        <param name="maf_source" value="cached"/>
-       <param name="mafType" value="ENCODE_TBA_hg17"/>
-       <param name="species" value="hg17,panTro1,baboon,marmoset,galago,rn3,mm6,rabbit,cow,canFam1,rfbat,shrew,armadillo,tenrec,monDom1,tetNig1,fr1,rheMac1,galGal2,xenTro1,danRer2,elephant,platypus,hedgehog,colobus_monkey,dusky_titi,owl_monkey,mouse_lemur"/>
+       <!-- <param name="mafType" value="ENCODE_TBA_hg17"/>
+       <param name="species" value="hg17,panTro1,baboon,marmoset,galago,rn3,mm6,rabbit,cow,canFam1,rfbat,shrew,armadillo,tenrec,monDom1,tetNig1,fr1,rheMac1,galGal2,xenTro1,danRer2,elephant,platypus,hedgehog,colobus_monkey,dusky_titi,owl_monkey,mouse_lemur"/> -->
        <param name="split_blocks_by_species" value="dont_split_blocks_by_species"/>
        <output name="out_file1" file="fsa_interval2maf.dat" />
      </test>
-     <test>
+     <!-- <test>
        <param name="input1" value="1.bed"/>
        <param name="maf_source" value="user"/>
        <param name="mafFile" value="fsa_interval2maf.dat"/>
@@ -104,7 +102,7 @@ python '$__tool_directory__/interval2maf.py' --dbkey=${input1.dbkey} --chromCol=
        <param name="species" value="hg18,panTro2,mm8"/>
        <param name="split_blocks_by_species" value="dont_split_blocks_by_species"/>
        <output name="out_file1" file="interval2maf_3from28way.maf" />
-     </test>
+     </test> -->
    </tests>
    <help>
 **What it does**

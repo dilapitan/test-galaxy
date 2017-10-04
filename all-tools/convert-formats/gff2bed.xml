@@ -15,10 +15,10 @@
       <param name="input" value="5.gff" ftype="gff"/>
       <output name="out_file1" file="gff2bed_out.bed"/>
     </test>
-    <test>
+    <!-- <test>
       <param name="input" value="gff2bed_in2.gff" ftype="gff"/>
       <output name="out_file1" file="gff2bed_out2.bed"/>
-    </test>
+    </test> -->
     <test>
       <!-- Test conversion of gff3 file. -->
       <param name="input" value="5.gff3" ftype="gff"/>

@@ -21,40 +21,40 @@ python '$__tool_directory__/interval_maf_to_merged_fasta.py' --dbkey=$dbkey --sp
               <option value="cached" selected="true">Locally Cached Alignments</option>
               <option value="user">Alignments in Your History</option>
             </param>
-            <when value="user">
-              <param name="maf_file" type="data" format="maf" label="MAF File">
-                <options>
-                  <filter type="data_meta" ref="input1" key="dbkey" />
-                </options>
-                <validator type="dataset_ok_validator" />
-              </param>
-              <param name="species" type="select" display="checkboxes" multiple="true" label="Choose species" help="Select species to be included in the final alignment">
-                <options>
-                  <filter type="data_meta" ref="maf_file" key="species" />
-                </options>
-              </param>
-            </when>
-            <when value="cached">
-              <param name="maf_identifier" type="select" label="MAF Type" >
-                <options from_file="maf_index.loc">
-                  <column name="name" index="0"/>
-                  <column name="value" index="1"/>
-                  <column name="dbkey" index="2"/>
-                  <column name="species" index="3"/>
-                  <filter type="data_meta" ref="input1" key="dbkey" column="2" multiple="True" separator=","/>
-                  <validator type="no_options" message="No alignments are available for the build associated with the selected interval file"/>
-                </options>
-              </param>
-              <param name="species" type="select" display="checkboxes" multiple="true" label="Choose species" help="Select species to be included in the final alignment">
-                <options from_file="maf_index.loc">
-                  <column name="uid" index="1"/>
-                  <column name="value" index="3"/>
-                  <column name="name" index="3"/>
-                  <filter type="param_value" ref="maf_identifier" name="uid" column="1"/>
-                  <filter type="multiple_splitter" column="3" separator=","/>
-                </options>
-              </param>
-            </when>
+           <!--  <when value="user">
+             <param name="maf_file" type="data" format="maf" label="MAF File">
+               <options>
+                 <filter type="data_meta" ref="input1" key="dbkey" />
+               </options>
+               <validator type="dataset_ok_validator" />
+             </param>
+             <param name="species" type="select" display="checkboxes" multiple="true" label="Choose species" help="Select species to be included in the final alignment">
+               <options>
+                 <filter type="data_meta" ref="maf_file" key="species" />
+               </options>
+             </param>
+           </when>
+           <when value="cached">
+             <param name="maf_identifier" type="select" label="MAF Type" >
+               <options from_file="maf_index.loc">
+                 <column name="name" index="0"/>
+                 <column name="value" index="1"/>
+                 <column name="dbkey" index="2"/>
+                 <column name="species" index="3"/>
+                 <filter type="data_meta" ref="input1" key="dbkey" column="2" multiple="True" separator=","/>
+                 <validator type="no_options" message="No alignments are available for the build associated with the selected interval file"/>
+               </options>
+             </param>
+             <param name="species" type="select" display="checkboxes" multiple="true" label="Choose species" help="Select species to be included in the final alignment">
+               <options from_file="maf_index.loc">
+                 <column name="uid" index="1"/>
+                 <column name="value" index="3"/>
+                 <column name="name" index="3"/>
+                 <filter type="param_value" ref="maf_identifier" name="uid" column="1"/>
+                 <filter type="multiple_splitter" column="3" separator=","/>
+               </options>
+             </param>
+           </when> -->
         </conditional>
         <param name="overwrite_with_gaps" type="select" label="Split into Gapless MAF blocks" help="When set to Yes, blocks are divided around gaps appearing in any species. This will prevent gaps occurring in the interior of the sequence for an aligning species from overwriting a nucleotide found for the same position in a lower-scoring block.">
           <option value="True" selected="true">No</option>
@@ -68,12 +68,12 @@ python '$__tool_directory__/interval_maf_to_merged_fasta.py' --dbkey=$dbkey --sp
     <test>
       <param name="input1" value="13.bed" dbkey="hg18" ftype="bed"/>
       <param name="maf_source" value="cached"/>
-      <param name="maf_identifier" value="17_WAY_MULTIZ_hg18"/>
-      <param name="species" value="hg18,mm8"/>
+      <!-- <param name="maf_identifier" value="17_WAY_MULTIZ_hg18"/>
+      <param name="species" value="hg18,mm8"/> -->
       <param name="overwrite_with_gaps" value="True"/>
       <output name="out_file1" file="interval_maf_to_merged_fasta_out3.fasta" />
     </test>
-    <test>
+    <!-- <test>
       <param name="input1" value="1.bed" dbkey="hg17" ftype="bed"/>
       <param name="maf_source" value="cached"/>
       <param name="maf_identifier" value="8_WAY_MULTIZ_hg17"/>
@@ -88,7 +88,7 @@ python '$__tool_directory__/interval_maf_to_merged_fasta.py' --dbkey=$dbkey --sp
       <param name="species" value="canFam1,hg17,mm5,panTro1,rn3"/>
       <param name="overwrite_with_gaps" value="True"/>
       <output name="out_file1" file="interval_maf_to_merged_fasta_user_out.dat" />
-    </test>
+    </test> -->
   </tests>
   <help>
 **What it does**

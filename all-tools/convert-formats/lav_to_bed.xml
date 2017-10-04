@@ -2,7 +2,7 @@
   <description>Converts a LAV formatted file to BED format</description>
   <command interpreter="python">lav_to_bed.py $lav_file $bed_file1 $bed_file2</command>
   <inputs>
-    <param name="lav_file" type="data" format="lav" label="LAV File" optional="False"/>
+    <param name="input" type="data" format="lav" label="LAV File" optional="False"/>
   </inputs>
   <outputs>
     <data name="bed_file1" format="bed"/>
@@ -10,7 +10,7 @@
   </outputs>
   <tests>
     <test>
-      <param name="lav_file" value="2.lav" ftype="lav" />
+      <param name="input" value="1.lav" ftype="lav" />
       <output name="bed_file2" file="lav_to_bed_out_1.bed" />
       <output name="bed_file2" file="lav_to_bed_out_2.bed" />
     </test>
