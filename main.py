@@ -107,34 +107,65 @@ def printMenu():
 	return i
 
 
-# choice = printMenu()
-# if (choice == 1):
-# 	toolTypePath = "convert-formats"
-# elif (choice == 2):
-# 	toolTypePath = "extract-features"
-# elif (choice == 3):
-# 	toolTypePath = "fetch-alignments"
-# elif (choice == 4):
-# 	toolTypePath = "fetch-sequence"
-# elif (choice == 5):
-# 	toolTypePath = "filter-and-sort"
-# elif (choice == 6):
-# 	toolTypePath = "graph-display-data"
-# elif (choice == 7):
-# 	toolTypePath = "join-subtract-and-group"
-# elif (choice == 8):
-# 	toolTypePath = "statistics"
-# elif (choice == 9):
-# 	toolTypePath = "text-man-xml-files"
-#	selectorsList = ("cat1", "ChangeCase", "Convert", "createInterval", "Cut1", "addValue", "Show beginning1", "mergeCols1", "Paste1", "random_lines1", "Remove beginning1", "secure_hash_message_digest", "Show tail1", "trimmer", "wc_gnu")
-#	label = "//*[@id='title_textutil']/a"
-#	toolCategory = "Text Man XML Files"
-# elif (choice == 0):
-# 	print("Program now exiting...")
-# 	exit()
-# else:
-# 	print("Input not in choice. Program will now exit...")
-# 	exit()
+choice = printMenu()
+if (choice == 1):
+	toolTypePath = "convert-formats"
+	toolCategory = "Text Man XML Files\n"
+	labelParam = "//*[@id='title_convert']/a"
+	selectorsList = ["axt_to_concat_fasta", "axt_to_fasta", "bed2gff1", "bed_to_bigBed", "gff2bed1", "lav_to_bed1", "MAF_To_BED1", "MAF_To_Fasta1", "MAF_To_Interval1", "Sff_extractor", "wig_to_bigWig", "wiggle2simple1"] 
+
+elif (choice == 2):
+	toolTypePath = "extract-features"
+	toolCategory = "Extract Features\n"
+	labelParam = "//*[@id='title_features']/a"
+	selectorsList = ["gene2exon1"]
+
+elif (choice == 3):
+	toolTypePath = "fetch-alignments"
+	toolCategory = "Fetch Alignments\n"
+	labelParam = "//*[@id='title_fetchAlign']/a"
+	selectorsList = ["maf_limit_size1", "MAF_Limit_To_Species1", "MAF_Reverse_Complement_1", "MAF_split_blocks_by_species1", "MAF_Thread_For_Species1"]
+
+elif (choice == 4):
+	toolTypePath = "fetch-sequence"
+	toolCategory = "Fetch Sequence\n"
+	labelParam = "//*[@id='title_fetchSeq']/a"
+	selectorsList = ["Extract genomic DNA 1"]
+
+elif (choice == 5):
+	toolTypePath = "filter-and-sort"
+	toolCategory = "Filter and Sort\n"
+	labelParam = "//*[@id='title_filter']/a"
+	selectorsList = ["Extract_features1", "Filter1", "gff_filter_by_attribute", "gff_filter_by_feature_count", "Grep1", "gtf_filter_by_attribute_values_list", "sort1"]
+
+elif (choice == 6):
+	toolTypePath = "graph-display-data"
+	print("Check google spreadsheet for this category.")
+
+elif (choice == 7):
+	toolTypePath = "join-subtract-and-group"
+	toolCategory = "Join, Subtract, and Group\n"
+	labelParam = "//*[@id='title_group']/a"
+	selectorsList = ["comp1 tool-link", "Grouping1", "join1"]
+
+elif (choice == 8):
+	toolTypePath = "statistics"
+	toolCategory = "Statistics\n"
+	labelParam = "//*[@id='title_stats']/a"
+	selectorsList = ["Summary_Statistics1"]
+
+elif (choice == 9):
+	toolTypePath = "text-man-xml-files"
+	toolCategory = "Text Man Files"
+	label = "//*[@id='title_textutil']/a"
+	selectorsList = ("cat1", "ChangeCase", "Convert", "createInterval", "Cut1", "addValue", "Show beginning1", "mergeCols1", "Paste1", "random_lines1", "Remove beginning1", "secure_hash_message_digest", "Show tail1", "trimmer", "wc_gnu")
+
+elif (choice == 0):
+	print("Program now exiting...")
+	exit()
+else:
+	print("Input not in choice. Program will now exit...")
+	exit()
 
 chromePath = "/home/dom/Downloads/chromedriver"
 
@@ -146,9 +177,9 @@ driver.get('http://localhost:8080/')
 toolsPath = "all-tools" # whole directory of all tools
 
 # remove later
-toolTypePath = "fetch-alignments"
-toolCategory = "\n"
-selectorsList = ("cat1", "ChangeCase", "Convert", "createInterval", "Cut1", "addValue", "Show beginning1", "mergeCols1", "Paste1", "random_lines1", "Remove beginning1", "secure_hash_message_digest", "Show tail1", "trimmer", "wc_gnu")
+#toolTypePath = "fetch-alignments"
+#toolCategory = "\n"
+#selectorsList = ["cat1", "ChangeCase", "Convert", "createInterval", "Cut1", "addValue", "Show beginning1", "mergeCols1", "Paste1", "random_lines1", "Remove beginning1", "secure_hash_message_digest", "Show tail1", "trimmer", "wc_gnu"]
 
 directory = toolsPath + "/" + toolTypePath
 
@@ -240,8 +271,8 @@ print("Done uploading test data!")
 
 time.sleep(3)
 
-# clicking the category of the tool picked
-label = driver.find_element_by_xpath("//*[@id='title_fetchAlign']/a")
+# clicking the category of the tool picked 
+label = driver.find_element_by_xpath(labelParam)
 
 # //*[@id='title_textutil']/a - Text Man
 # //*[@id='title_filter']/a - Filter and Sort
@@ -252,9 +283,10 @@ label = driver.find_element_by_xpath("//*[@id='title_fetchAlign']/a")
 # //*[@id='title_plots']/a
 # //*[@id='title_convert']/a
 # //*[@id='title_fetchAlign']/a
+
 label.click() 
 
-selectorsList = ["MAF_Thread_For_Species1"] # put the id's here
+#selectorsList = [] # put the id's here
 slcounter = 0
 historyPanel = [] # container of the history panel (results/right side of Galaxy)
 
@@ -297,6 +329,7 @@ for file in items:	# whole xml directory under a specific category of tool
 		of.write(finalString)
 
 		# getting the proper css selector for the specific tool
+		print(slcounter, "aaaaaaaaaaaaaa")
 		preSelector = selectorsList[slcounter]
 		replacedSpace = preSelector.replace(" ", ".")
 		mainSelector = "a." + replacedSpace
@@ -331,8 +364,8 @@ for file in items:	# whole xml directory under a specific category of tool
 				# 	inputField.send_keys(Keys.TAB)
 				# except NoSuchElementException:
 				# 	print("No element (text).")
-				print("Skipping this to since it has already input values")				
-
+				#print("Skipping this to since it has already input values")				
+				print("")
 			elif (dataType == "select"): # for select
 
 				try: # for check boxes
@@ -340,7 +373,7 @@ for file in items:	# whole xml directory under a specific category of tool
 					indexPath = 0 # to be used later for xpath
 					listSize = len(lists)
 
-					print("Performing checkbox...")
+					#print("Performing checkbox...")
 
 					for t in range(0, listSize):
 						wb = lists[t]
@@ -357,7 +390,7 @@ for file in items:	# whole xml directory under a specific category of tool
 
 				except NoSuchElementException: # for dropdown
 					
-					print("Skippping dropdown since it already has default values...")
+					#print("Skippping dropdown since it already has default values...")
 
 					# while (True):
 					# 	dropDownField = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid-')]/div[3]") 
@@ -371,9 +404,10 @@ for file in items:	# whole xml directory under a specific category of tool
 					# dropDown = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid-')]/div[3]")
 					# dropDown.send_keys(testValue)
 					# dopDown.send_keys(Keys.TAB)
+					print("")
 
 			elif (dataType == "boolean"):
-				print("boolean")
+				#print("boolean")
 				try:
 					if (testValue == "true"):
 						booleanButton = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]/label[1]")
@@ -382,7 +416,8 @@ for file in items:	# whole xml directory under a specific category of tool
 						booleanButton = driver.find_element_by_xpath("//*[starts-with(@id, 'field-uid')]/div[3]/label[2]")
 						booleanButton.click()
 				except NoSuchElementException:
-					print("No element (boolean).")
+					#print("No element (boolean).")
+					print("")
 	
 	
 		# clicking of button
