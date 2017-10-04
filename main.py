@@ -146,7 +146,7 @@ driver.get('http://localhost:8080/')
 toolsPath = "all-tools" # whole directory of all tools
 
 # remove later
-toolTypePath = "convert-formats"
+toolTypePath = "fetch-alignments"
 toolCategory = "\n"
 selectorsList = ("cat1", "ChangeCase", "Convert", "createInterval", "Cut1", "addValue", "Show beginning1", "mergeCols1", "Paste1", "random_lines1", "Remove beginning1", "secure_hash_message_digest", "Show tail1", "trimmer", "wc_gnu")
 
@@ -241,7 +241,7 @@ print("Done uploading test data!")
 time.sleep(3)
 
 # clicking the category of the tool picked
-label = driver.find_element_by_xpath("//*[@id='title_convert']/a")
+label = driver.find_element_by_xpath("//*[@id='title_fetchAlign']/a")
 
 # //*[@id='title_textutil']/a - Text Man
 # //*[@id='title_filter']/a - Filter and Sort
@@ -251,9 +251,10 @@ label = driver.find_element_by_xpath("//*[@id='title_convert']/a")
 # //*[@id='title_stats']/a - Statistics
 # //*[@id='title_plots']/a
 # //*[@id='title_convert']/a
+# //*[@id='title_fetchAlign']/a
 label.click() 
 
-selectorsList = ["MAF_To_Fasta1"] # put the id's here
+selectorsList = ["MAF_Thread_For_Species1"] # put the id's here
 slcounter = 0
 historyPanel = [] # container of the history panel (results/right side of Galaxy)
 

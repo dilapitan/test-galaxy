@@ -1,7 +1,7 @@
 Tool Category: 
 
 Tool number: 1
-Tool name: MAF to FASTA
+Tool name: Join MAF blocks
 
 Test Number: 1
 Status: True Positive.
