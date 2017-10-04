@@ -329,7 +329,7 @@ for file in items:	# whole xml directory under a specific category of tool
 		of.write(finalString)
 
 		# getting the proper css selector for the specific tool
-		print(slcounter, "aaaaaaaaaaaaaa")
+		#print(slcounter, "aaaaaaaaaaaaaa")
 		preSelector = selectorsList[slcounter]
 		replacedSpace = preSelector.replace(" ", ".")
 		mainSelector = "a." + replacedSpace
@@ -515,5 +515,7 @@ for file in items:	# whole xml directory under a specific category of tool
 	slcounter += 1
 
 of.close() # closes the output file
+
+print("Check output.txt.")
 
 
